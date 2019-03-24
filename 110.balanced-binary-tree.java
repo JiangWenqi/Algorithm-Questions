@@ -16,7 +16,7 @@
  * For this problem, a height-balanced binary tree is defined as:
  * 
  * 
- * a binary tree in which the depth of the two subtrees of every node never
+ * a binary tree in which the getMaxDepth of the two subtrees of every node never
  * differ by more than 1.
  * 
  * 
@@ -60,18 +60,20 @@
  * }
  */
 class Solution {
-	private boolean result = true;
+	private boolean isBalanced = true;
+
     public boolean isBalanced(TreeNode root) {
-    	maxDepth(root);
-    	return result;
+		getMaxDepth(root);
+        return isBalanced;
+    }
+
+	private int getMaxDepth(TreeNode root) {
+		if (root == null)	return 0;
+		int l = getMaxDepth(root.left);
+		int r = getMaxDepth(root.right);
+		if (Math.abs(l - r) > 1) {
+			isBalanced = false;
+		}
+		return 1 + Math.max(r, l);
 	}
-	public int maxDepth(TreeNode root) {
-    	if (root == null)
-        	return 0;
-    	int l = maxDepth(root.left);
-    	int r = maxDepth(root.right);
-    	if (Math.abs(l - r) > 1)
-        	result = false;
-   		return 1 + Math.max(l, r);
-	}	
 }
