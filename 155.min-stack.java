@@ -46,32 +46,33 @@
 class MinStack {
 
     /** initialize your data structure here. */
-	List<Integer> stack = null;
-
-    public MinStack() {
-        stack = new ArrayList<Integer>();
-    }
-    
+    int min = Integer.MAX_VALUE;
+    Stack<Integer> stack = new Stack<Integer>();
     public void push(int x) {
-        stack.add(x);
+        // only push the old minimum value when the current
+        // minimum value changes after pushing the new value x
+        if(x <= min){
+            stack.push(min);
+            min=x;
+        }
+        stack.push(x);
     }
-    
+
     public void pop() {
-        stack.remove(stack.size() - 1);
+        // if pop operation could result in the changing of the current minimum value,
+        // pop twice and change the current minimum value to the last minimum value.
+        if(stack.pop() == min) min=stack.pop();
     }
-    
+
     public int top() {
-        return stack.get(stack.size() -1);
+        return stack.peek();
     }
-    
+
     public int getMin() {
-        int min = stack.get(0);
-		for (int i : stack) {
-			if (min > i)	min = i;
-		}
-		return min;
+        return min;
     }
 }
+
 
 /**
  * Your MinStack object will be instantiated and called as such:
