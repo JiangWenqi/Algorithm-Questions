@@ -1,32 +1,28 @@
 /*
- * @lc app=leetcode id=83 lang=java
+ * @lc app=leetcode.cn id=83 lang=java
  *
- * [83] Remove Duplicates from Sorted List
+ * [83] 删除排序链表中的重复元素
  *
- * https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/
+ * https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/description/
  *
  * algorithms
- * Easy (42.03%)
- * Total Accepted:    308.4K
- * Total Submissions: 733.2K
+ * Easy (44.75%)
+ * Total Accepted:    21.8K
+ * Total Submissions: 48.6K
  * Testcase Example:  '[1,1,2]'
  *
- * Given a sorted linked list, delete all duplicates such that each element
- * appear only once.
+ * 给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。
  * 
- * Example 1:
+ * 示例 1:
  * 
- * 
- * Input: 1->1->2
- * Output: 1->2
+ * 输入: 1->1->2
+ * 输出: 1->2
  * 
  * 
- * Example 2:
+ * 示例 2:
  * 
- * 
- * Input: 1->1->2->3->3
- * Output: 1->2->3
- * 
+ * 输入: 1->1->2->3->3
+ * 输出: 1->2->3
  * 
  */
 /**
@@ -39,15 +35,16 @@
  */
 class Solution {
     public ListNode deleteDuplicates(ListNode head) {
-	if (head == null || head.next == null) return head;
-	ListNode temp = head;
-	while (temp != null && temp.next != null) {
-	    
-	    if (temp.val == temp.next.val)
-		temp.next = temp.next.next;
-	    else
-		temp = temp.next;
-	}
-	return head;
+		if (head == null || head.next == null)	return head;
+		ListNode temp = head;
+		while (temp != null && temp.next != null) {
+			if (temp.val == temp.next.val)	
+				temp.next = temp.next.next;
+			else
+				temp = temp.next;
+		}
+
+		return head;
+
     }
 }
