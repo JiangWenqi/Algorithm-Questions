@@ -1,56 +1,50 @@
 /*
- * @lc app=leetcode id=100 lang=java
+ * @lc app=leetcode.cn id=100 lang=java
  *
- * [100] Same Tree
+ * [100] 相同的树
  *
- * https://leetcode.com/problems/same-tree/description/
+ * https://leetcode-cn.com/problems/same-tree/description/
  *
  * algorithms
- * Easy (49.54%)
- * Total Accepted:    356.9K
- * Total Submissions: 720K
+ * Easy (52.02%)
+ * Total Accepted:    18.9K
+ * Total Submissions: 36.2K
  * Testcase Example:  '[1,2,3]\n[1,2,3]'
  *
- * Given two binary trees, write a function to check if they are the same or
- * not.
+ * 给定两个二叉树，编写一个函数来检验它们是否相同。
  * 
- * Two binary trees are considered the same if they are structurally identical
- * and the nodes have the same value.
+ * 如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。
  * 
- * Example 1:
+ * 示例 1:
  * 
- * 
- * Input:     1         1
+ * 输入:       1         1
  * ⁠         / \       / \
  * ⁠        2   3     2   3
  * 
  * ⁠       [1,2,3],   [1,2,3]
  * 
- * Output: true
+ * 输出: true
  * 
+ * 示例 2:
  * 
- * Example 2:
- * 
- * 
- * Input:     1         1
+ * 输入:      1          1
  * ⁠         /           \
  * ⁠        2             2
  * 
  * ⁠       [1,2],     [1,null,2]
  * 
- * Output: false
+ * 输出: false
  * 
  * 
- * Example 3:
+ * 示例 3:
  * 
- * 
- * Input:     1         1
+ * 输入:       1         1
  * ⁠         / \       / \
  * ⁠        2   1     1   2
  * 
  * ⁠       [1,2,1],   [1,1,2]
  * 
- * Output: false
+ * 输出: false
  * 
  * 
  */
@@ -65,9 +59,12 @@
  */
 class Solution {
     public boolean isSameTree(TreeNode p, TreeNode q) {
-	if (p == null && q == null) return true;
-	if ((p != null && q == null) || (p == null && q != null)) return false;
-	if (p.val != q.val) return false;
-	return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);        
+		if (p == null && q == null) return true;
+		else if (p != null && q ==null)	return false;
+		else if (p == null && q != null)	return false;
+		
+		if (p.val != q.val)	return false;
+
+		return isSameTree(p.left, q.left) && isSameTree(p.right, q.right); 
     }
 }
