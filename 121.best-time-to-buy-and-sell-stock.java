@@ -40,21 +40,17 @@
  * 
  */
 class Solution {
-    public int maxProfit(int[] prices) {
-		int ans = 0;
-		if (prices.length == 0) {
-			return ans;
-		}
-		int bought = prices[0];
-		for (int i = 1; i < prices.length; i++) {
-			if (prices[i] > bought) {
-				if (ans < (prices[i]-bought)) {
-					ans = prices[i]-bought;
-				}
-			} else {
-				bought = prices[i];
+	public int maxProfit(int[] prices) {
+		int miniPrice = Integer.MAX_VALUE;
+		int maxProfit = 0;
+
+		for (int i = 0; i < prices.length; i++) {
+			if (prices[i] < miniPrice) {
+				miniPrice = prices[i];
+			} else if (prices[i] - miniPrice > maxProfit) {
+				maxProfit = prices[i] - miniPrice;
 			}
 		}
-		return ans;
-    }
+		return maxProfit;
+	}
 }
