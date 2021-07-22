@@ -34,22 +34,23 @@
  */
 class Solution {
 	public boolean isPalindrome(String s) {
-		if (s.isEmpty())	return true;
+		if (s.isEmpty())
+			return true;
 		int start = 0, tail = s.length() - 1;
 		char cStart, cTail;
-		while(start <= tail) {
+		while (start <= tail) {
 			cStart = s.charAt(start);
 			cTail = s.charAt(tail);
 
 			if (!Character.isLetterOrDigit(cStart)) {
-				start ++;
+				start++;
 			} else if (!Character.isLetterOrDigit(cTail)) {
-				tail --;
+				tail--;
 			} else {
 				if (Character.toLowerCase(cStart) != Character.toLowerCase(cTail))
 					return false;
-				start ++;
-				tail --;
+				start++;
+				tail--;
 			}
 		}
 		return true;
