@@ -65,27 +65,22 @@
  * 
  */
 /**
- * Definition for singly-linked list.
- * class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) {
- *         val = x;
- *         next = null;
- *     }
- * }
+ * Definition for singly-linked list. class ListNode { int val; ListNode next;
+ * ListNode(int x) { val = x; next = null; } }
  */
 public class Solution {
-    public boolean hasCycle(ListNode head) {
-		if (head == null || head.next == null)	return false;
+	public boolean hasCycle(ListNode head) {
+		if (head == null || head.next == null)
+			return false;
 		ListNode slowPoint = head;
 		ListNode quickPoint = head.next;
 		while (quickPoint != null && quickPoint.next != null) {
-			if (slowPoint == quickPoint)	return true;
+			if (slowPoint == quickPoint)
+				return true;
 			slowPoint = slowPoint.next;
 			quickPoint = quickPoint.next.next;
 		}
 		return false;
 
-    }
+	}
 }

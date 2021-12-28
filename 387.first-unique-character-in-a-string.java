@@ -21,7 +21,7 @@ class Solution {
             if (map.get(chars[i]) == 1) {
                 return i;
             }
-        }w
+        }
         return -1;
     }
 }
