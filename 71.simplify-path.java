@@ -18,7 +18,7 @@ class Solution {
             }
         }
 
-        return "/"+String.join("/", stack);
+        return "/" + String.join("/", stack);
     }
 }
 // @lc code=end
