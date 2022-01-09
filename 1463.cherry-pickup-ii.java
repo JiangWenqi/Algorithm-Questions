@@ -6,36 +6,40 @@
 
 // @lc code=start
 class Solution {
+    private static final int[] DIRS = { -1, 0, 1 };
+
     public int cherryPickup(int[][] grid) {
-        int Rows = grid.length, Cols = grid[0].length;
-        int[][][] dp = new int[2][Cols][Cols]; // we just need previous row memories
-        dp[0][0][Cols - 1] = grid[0][0] + grid[0][Cols - 1]; // init
-        int[] dirs = new int[] { -1, 0, 1 };
+        int rows = grid.length, cols = grid[0].length;
+        int[][][] dp = new int[rows][cols][cols];
+        dp[0][0][cols - 1] = grid[0][0] + grid[0][cols - 1];
         int res = 0;
 
-        for (int r = 1; r < Rows; r++) {
-            int prevR = (r - 1) % 2, curR = r % 2;
+        // from row 1 to bottom
+        for (int row = 1; row < rows; row++) {
 
-            for (int c1 = 0; c1 < Cols && c1 <= r; c1++) { // robot 1 start top-left
-                for (int c2 = Cols - 1; c2 > c1 && c2 >= (Cols - 1 - r); c2--) { // robot 2 start top-right
-                    // So all can be reached
-                    // We just need to be careful to not double dip
-                    int cherries = grid[r][c1] + grid[r][c2];
+            // robot#1 from left top \
+            for (int col1 = 0; col1 < cols && col1 <= row; col1++) {
+                // robot#2 form right top /
+                for (int col2 = cols - 1; col2 > col1 && col2 >= (cols - 1 - row); col2--) {
+
                     int prevCherries = 0;
-
-                    // Go direction
-                    for (int d1 : dirs) {
-                        for (int d2 : dirs) {
-                            int prevC1 = c1 + d1, prevC2 = c2 + d2;
-                            if (0 <= prevC1 && prevC1 < Cols && 0 <= prevC2 && prevC2 < Cols && prevC1 != prevC2) {
-                                prevCherries = Math.max(prevCherries, dp[prevR][prevC1][prevC2]);
+                    for (int dir1 : DIRS) {
+                        for (int dir2 : DIRS) {
+                            int prevRow = row - 1, prevCol1 = col1 + dir1, prevCol2 = col2 + dir2;
+                            if (prevCol1 >= 0 && prevCol1 < cols && prevCol2 >= 0 && prevCol2 < cols
+                                    && prevCol1 != prevCol2) {
+                                prevCherries = Math.max(prevCherries, dp[prevRow][prevCol1][prevCol2]);
                             }
+
                         }
                     }
-                    dp[curR][c1][c2] = cherries + prevCherries;
-                    res = Math.max(res, dp[curR][c1][c2]);
+                    int cherries = grid[row][col1] + grid[row][col2];
+                    dp[row][col1][col2] = cherries + prevCherries;
+                    res = Math.max(res, dp[row][col1][col2]);
                 }
+
             }
+
         }
         return res;
     }
