@@ -28,21 +28,24 @@
  */
 class Solution {
     public String addBinary(String a, String b) {
-        int aLength = a.length(), bLength = b.length();
-        StringBuilder sb = new StringBuilder();
-        int carry = 0;
-        while (aLength > 0 || bLength > 0) {
-            int sum = carry;
-            if (aLength > 0) sum += a.charAt(--aLength) - '0';
-            if (bLength > 0) sum += b.charAt(--bLength) - '0';
-            sb.append(sum % 2);
-            carry = sum / 2;
-        }
 
+        int carry = 0;
+        StringBuilder sb = new StringBuilder();
+        for (int i = a.length() - 1, j = b.length() - 1; i >= 0 || j >= 0; i--, j--) {
+            if (i >= 0) {
+                carry += a.charAt(i) - '0';
+            }
+            if (j >= 0) {
+                carry += b.charAt(j) - '0';
+            }
+            sb.append(carry % 2);
+            carry = carry / 2;
+        }
         if (carry != 0) {
             sb.append(carry);
         }
-
         return sb.reverse().toString();
+
     }
+
 }
