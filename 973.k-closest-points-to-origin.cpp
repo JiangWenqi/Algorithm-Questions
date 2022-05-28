@@ -11,9 +11,21 @@ class Solution
 public:
     vector<vector<int>> kClosest(vector<vector<int>> &points, int k)
     {
-        nth_element(points.begin(), points.begin() + k - 1, points.end(), [](vector<int> &a, vector<int> &b)
-                    { return a[0] * a[0] + a[1] * a[1] < b[0] * b[0] + b[1] * b[1]; });
-        return vector<vector<int>>(points.begin(), points.begin() + k);
+        vector<vector<int>> res(k);
+        priority_queue<vector<int>> q;
+        for (auto &point : points)
+        {
+            int x = point[0], y = point[1];
+            q.push({x * x + y * y, x, y});
+            if (q.size() > k)
+                q.pop();
+        }
+        for (int i = 0; i < k; i++)
+        {
+            res[i] = {q.top()[1], q.top()[2]};
+            q.pop();
+        }
+        return res;
     }
 };
 // @lc code=end
