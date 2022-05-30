@@ -63,39 +63,29 @@
  */
 
 // @lc code=start
-class TrieNode
-{
-public:
-    bool isWord;
-    TrieNode *children[26];
 
-    TrieNode()
+class Trie
+{
+private:
+    bool isWord;
+    Trie *children[26];
+
+public:
+    Trie()
     {
         isWord = false;
         for (int i = 0; i < 26; i++)
             children[i] = NULL;
     }
-};
-class Trie
-{
-private:
-    TrieNode *root;
-
-public:
-    Trie()
-    {
-        root = new TrieNode();
-    }
 
     void insert(string word)
     {
-
-        TrieNode *curr = root;
+        Trie *curr = this;
         for (int i = 0; i < word.size(); i++)
         {
             int idx = word[i] - 'a';
             if (!curr->children[idx])
-                curr->children[idx] = new TrieNode();
+                curr->children[idx] = new Trie();
 
             curr = curr->children[idx];
         }
@@ -104,7 +94,7 @@ public:
 
     bool search(string word)
     {
-        TrieNode *curr = root;
+        Trie *curr = this;
         for (int i = 0; i < word.size(); i++)
         {
             int idx = word[i] - 'a';
@@ -116,7 +106,7 @@ public:
     }
     bool startsWith(string prefix)
     {
-        TrieNode *curr = root;
+        Trie *curr = this;
         for (int i = 0; i < prefix.size(); i++)
         {
 
