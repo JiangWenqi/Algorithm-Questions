@@ -73,6 +73,11 @@ using namespace std;
 class Solution
 {
 public:
+    // Divide the array into two parts: a part is positive, b part is negative
+    // sum(a) + sum(b) = sum
+    // sum(a) - sum(b) = target
+    // Add them together
+    // 2 * sum(a) = sum + target => sum(a) = (sum + target) / 2
     int findTargetSumWays(vector<int> &nums, int target)
     {
         int sum = 0;
