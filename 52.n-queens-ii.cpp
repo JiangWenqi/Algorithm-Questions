@@ -1,3 +1,11 @@
+// @before-stub-for-debug-begin
+#include <vector>
+#include <string>
+#include "commoncppproblem52.h"
+
+using namespace std;
+// @before-stub-for-debug-end
+
 /*
  * @lc app=leetcode id=52 lang=cpp
  *
@@ -8,27 +16,24 @@
 class Solution
 {
 private:
-    int num;
-    vector<bool> col, dg, udg;
-    vector<string> path;
-    vector<vector<string>> res;
-
+    int nums, res = 0;
+    vector<bool> cols, dgs, udgs;
     void dfs(int row)
     {
-        if (row == num)
+        if (row == nums)
         {
-            res.push_back(path);
+            res++;
             return;
         }
-        for (int i = 0; i < num; i++)
+        // y = x + k => k = y - x
+        // y = -x + k => k = y + x
+        for (int col = 0; col < nums; col++)
         {
-            if (!col[i] && !dg[i - row + num] && !udg[i + row])
+            if (!cols[col] && !dgs[row - col + nums] && !udgs[row + col])
             {
-                path[row][i] = 'Q';
-                col[i] = dg[i - row + num] = udg[i + row] = true;
+                cols[col] = dgs[row - col + nums] = udgs[row + col] = true;
                 dfs(row + 1);
-                path[row][i] = '.';
-                col[i] = dg[i - row + num] = udg[i + row] = false;
+                cols[col] = dgs[row - col + nums] = udgs[row + col] = false;
             }
         }
     }
@@ -36,11 +41,10 @@ private:
 public:
     int totalNQueens(int n)
     {
-        num = n;
-        col.resize(n, false);
-        dg.resize(2 * n, false);
-        udg.resize(2 * n, false);
-
+        nums = n;
+        cols.resize(n, false);
+        dgs.resize(2 * n, false);
+        udgs.resize(2 * n, false);
         dfs(0);
         return res;
     }
