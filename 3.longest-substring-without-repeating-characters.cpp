@@ -1,3 +1,11 @@
+// @before-stub-for-debug-begin
+#include <vector>
+#include <string>
+#include "commoncppproblem3.h"
+
+using namespace std;
+// @before-stub-for-debug-end
+
 /*
  * @lc app=leetcode id=3 lang=cpp
  *
@@ -60,15 +68,15 @@ public:
     int lengthOfLongestSubstring(string s)
     {
         unordered_map<char, int> m;
-        int len = 0;
+        int res = 0;
         for (int i = 0, j = 0; i < s.size(); i++)
         {
             m[s[i]]++;
             while (m[s[i]] > 1)
                 m[s[j++]]--;
-            len = max(len, i - j + 1);
+            res = max(res, i - j + 1);
         }
-        return len;
+        return res;
     }
 };
 // @lc code=end
