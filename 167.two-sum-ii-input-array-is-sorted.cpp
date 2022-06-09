@@ -1,6 +1,7 @@
 // @before-stub-for-debug-begin
-#include <vector>
 #include <string>
+#include <vector>
+
 #include "commoncppproblem167.h"
 
 using namespace std;
@@ -76,23 +77,20 @@ using namespace std;
  */
 
 // @lc code=start
-class Solution
-{
-public:
-    vector<int> twoSum(vector<int> &numbers, int target)
-    {
-        int l = 1, r = numbers.size();
-        while (l < r)
-        {
-            int sum = numbers[l - 1] + numbers[r - 1];
-            if (sum > target)
-                r--;
-            else if (sum < target)
-                l++;
-            else
-                return {l, r};
-        }
-        return {-1};
+class Solution {
+ public:
+  vector<int> twoSum(vector<int> &numbers, int target) {
+    int l = 1, r = numbers.size();
+    while (l < r) {
+      int sum = numbers[l - 1] + numbers[r - 1];
+      if (sum > target)
+        r--;
+      else if (sum < target)
+        l++;
+      else
+        return {l, r};
     }
+    return {-1};
+  }
 };
 // @lc code=end

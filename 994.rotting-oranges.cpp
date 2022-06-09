@@ -1,6 +1,7 @@
 // @before-stub-for-debug-begin
-#include <vector>
 #include <string>
+#include <vector>
+
 #include "commoncppproblem994.h"
 
 using namespace std;
@@ -75,62 +76,50 @@ using namespace std;
  */
 
 // @lc code=start
-class Solution
-{
-private:
-    int dirs[5] = {0, 1, 0, -1, 0};
+class Solution {
+ private:
+  int dirs[5] = {0, 1, 0, -1, 0};
 
-public:
-    int orangesRotting(vector<vector<int>> &grid)
-    {
-        int m = grid.size(), n = grid[0].size();
-        int minuets = -1;
-        int orange = 0, rottingOrange = 0;
-        queue<pair<int, int>> q;
-        for (int i = 0; i < m; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
-                if (grid[i][j] >= 1)
-                {
-                    orange++;
-                    if (grid[i][j] == 2)
-                    {
-                        q.push(make_pair(i, j));
-                        rottingOrange++;
-                    }
-                }
-
-            }
+ public:
+  int orangesRotting(vector<vector<int>> &grid) {
+    int m = grid.size(), n = grid[0].size();
+    int minuets = -1;
+    int orange = 0, rottingOrange = 0;
+    queue<pair<int, int>> q;
+    for (int i = 0; i < m; i++) {
+      for (int j = 0; j < n; j++) {
+        if (grid[i][j] >= 1) {
+          orange++;
+          if (grid[i][j] == 2) {
+            q.push(make_pair(i, j));
+            rottingOrange++;
+          }
         }
-        if (orange == 0)
-            return 0;
-
-        while (!q.empty())
-        {
-            minuets++;
-            int sz = q.size();
-            for (int i = 0; i < sz; i++)
-            {
-                int x = q.front().first, y = q.front().second;
-                q.pop();
-
-                for (int d = 0; d < 4; d++)
-                {
-                    int nx = x + dirs[d], ny = y + dirs[d + 1];
-                    if (nx >= 0 && nx < m && ny >= 0 && ny < n && grid[nx][ny] == 1)
-                    {
-                        q.push(make_pair(nx, ny));
-                        grid[nx][ny] = 2;
-                        rottingOrange++;
-                    }
-                }
-            }
-        }
-        if (rottingOrange < orange)
-            return -1;
-        else
-            return minuets;
+      }
     }
+    if (orange == 0) return 0;
+
+    while (!q.empty()) {
+      minuets++;
+      int sz = q.size();
+      for (int i = 0; i < sz; i++) {
+        int x = q.front().first, y = q.front().second;
+        q.pop();
+
+        for (int d = 0; d < 4; d++) {
+          int nx = x + dirs[d], ny = y + dirs[d + 1];
+          if (nx >= 0 && nx < m && ny >= 0 && ny < n && grid[nx][ny] == 1) {
+            q.push(make_pair(nx, ny));
+            grid[nx][ny] = 2;
+            rottingOrange++;
+          }
+        }
+      }
+    }
+    if (rottingOrange < orange)
+      return -1;
+    else
+      return minuets;
+  }
 };
 // @lc code=end

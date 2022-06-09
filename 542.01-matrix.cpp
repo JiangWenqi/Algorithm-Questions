@@ -1,3 +1,12 @@
+// @before-stub-for-debug-begin
+#include <string>
+#include <vector>
+
+#include "commoncppproblem542.h"
+
+using namespace std;
+// @before-stub-for-debug-end
+
 /*
  * @lc app=leetcode id=542 lang=cpp
  *
@@ -51,42 +60,35 @@
 class Solution
 
 {
-private:
-    int dirs[5] = {1, 0, -1, 0, 1};
+ private:
+  int dirs[5] = {1, 0, -1, 0, 1};
 
-public:
-    vector<vector<int>> updateMatrix(vector<vector<int>> &mat)
-    {
-        int m = mat.size(), n = mat[0].size();
-        vector<vector<int>> res(m, vector<int>(n, -1));
-        queue<pair<int, int>> q;
-        for (int i = 0; i < m; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
-                if (mat[i][j] == 0)
-                {
-                    res[i][j] = 0;
-                    q.push(make_pair(i, j));
-                }
-            }
+ public:
+  vector<vector<int>> updateMatrix(vector<vector<int>> &mat) {
+    int m = mat.size(), n = mat[0].size();
+    vector<vector<int>> res(m, vector<int>(n, -1));
+    queue<pair<int, int>> q;
+    for (int i = 0; i < m; i++) {
+      for (int j = 0; j < n; j++) {
+        if (mat[i][j] == 0) {
+          res[i][j] = 0;
+          q.push(make_pair(i, j));
         }
-        while (!q.empty())
-        {
-            int x = q.front().first, y = q.front().second;
-            q.pop();
-            for (int i = 0; i < 4; i++)
-            {
-                int nx = x + dirs[i], ny = y + dirs[i + 1];
-                if (nx >= 0 && nx < m && ny >= 0 && ny < n && res[nx][ny] == -1)
-                {
-                    res[nx][ny] = res[x][y] + 1;
-                    q.push(make_pair(nx, ny));
-                }
-            }
-        }
-
-        return res;
+      }
     }
+    while (!q.empty()) {
+      int x = q.front().first, y = q.front().second;
+      q.pop();
+      for (int i = 0; i < 4; i++) {
+        int nx = x + dirs[i], ny = y + dirs[i + 1];
+        if (nx >= 0 && nx < m && ny >= 0 && ny < n && res[nx][ny] == -1) {
+          res[nx][ny] = res[x][y] + 1;
+          q.push(make_pair(nx, ny));
+        }
+      }
+    }
+
+    return res;
+  }
 };
 // @lc code=end
