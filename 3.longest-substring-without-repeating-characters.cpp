@@ -1,6 +1,8 @@
 // @before-stub-for-debug-begin
-#include <vector>
 #include <string>
+#include <unordered_map>
+#include <vector>
+
 #include "commoncppproblem3.h"
 
 using namespace std;
@@ -62,21 +64,17 @@ using namespace std;
  */
 
 // @lc code=start
-class Solution
-{
-public:
-    int lengthOfLongestSubstring(string s)
-    {
-        unordered_map<char, int> m;
-        int res = 0;
-        for (int i = 0, j = 0; i < s.size(); i++)
-        {
-            m[s[i]]++;
-            while (m[s[i]] > 1)
-                m[s[j++]]--;
-            res = max(res, i - j + 1);
-        }
-        return res;
+class Solution {
+ public:
+  int lengthOfLongestSubstring(string s) {
+    unordered_map<char, int> m;
+    int res = 0;
+    for (int i = 0, j = 0; i < s.size(); i++) {
+      m[s[i]]++;
+      while (m[s[i]] > 1) m[s[j++]]--;
+      res = max(res, i - j + 1);
     }
+    return res;
+  }
 };
 // @lc code=end
