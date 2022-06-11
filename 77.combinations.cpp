@@ -1,3 +1,12 @@
+// @before-stub-for-debug-begin
+#include <string>
+#include <vector>
+
+#include "commoncppproblem77.h"
+
+using namespace std;
+// @before-stub-for-debug-end
+
 /*
  * @lc app=leetcode id=77 lang=cpp
  *
@@ -52,35 +61,27 @@
  */
 
 // @lc code=start
-class Solution
-{
+class Solution {
+ private:
+  vector<int> path;
+  vector<vector<int>> res;
 
-private:
-    vector<int> path;
-    vector<vector<int>> res;
-
-    void dfs(int idx, int n, int k)
-    {
-        if (!k)
-        {
-            res.push_back(path);
-            return;
-        }
-
-        for (int i = idx; i <= n; i++)
-        {
-
-            path.push_back(i);
-            dfs(i + 1, n, k - 1);
-            path.pop_back();
-        }
+  void backtracking(int start, int n, int length) {
+    if (!length) {
+      res.push_back(path);
+      return;
     }
-
-public:
-    vector<vector<int>> combine(int n, int k)
-    {
-        dfs(1, n, k);
-        return res;
+    for (int i = start; i <= n; i++) {
+      path.push_back(i);
+      backtracking(i + 1, n, length - 1);
+      path.pop_back();
     }
+  }
+
+ public:
+  vector<vector<int>> combine(int n, int k) {
+    backtracking(1, n, k);
+    return res;
+  }
 };
 // @lc code=end
