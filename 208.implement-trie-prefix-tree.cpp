@@ -1,3 +1,8 @@
+#include <string>
+#include <unordered_map>
+#include <vector>
+
+using namespace std;
 /*
  * @lc app=leetcode id=208 lang=cpp
  *
@@ -11,7 +16,8 @@
  * Dislikes: 92
  * Total Accepted:    590.3K
  * Total Submissions: 1M
- * Testcase Example:  '["Trie","insert","search","search","startsWith","insert","search"]\n' +
+ * Testcase Example:
+ '["Trie","insert","search","search","startsWith","insert","search"]\n' +
   '[[],["apple"],["apple"],["app"],["app"],["app"],["app"]]'
  *
  * A trie (pronounced as "try") or prefix tree is a tree data structure used to
@@ -64,59 +70,51 @@
 
 // @lc code=start
 
-class Trie
-{
+class Trie {
 private:
-    bool isWord;
-    Trie *children[26];
+  bool isWord;
+  Trie *children[26];
 
 public:
-    Trie()
-    {
-        isWord = false;
-        for (int i = 0; i < 26; i++)
-            children[i] = NULL;
-    }
+  Trie() {
+    isWord = false;
+    for (int i = 0; i < 26; i++)
+      children[i] = NULL;
+  }
 
-    void insert(string word)
-    {
-        Trie *curr = this;
-        for (int i = 0; i < word.size(); i++)
-        {
-            int idx = word[i] - 'a';
-            if (!curr->children[idx])
-                curr->children[idx] = new Trie();
+  void insert(string word) {
+    Trie *curr = this;
+    for (int i = 0; i < word.size(); i++) {
+      int idx = word[i] - 'a';
+      if (!curr->children[idx])
+        curr->children[idx] = new Trie();
 
-            curr = curr->children[idx];
-        }
-        curr->isWord = true;
+      curr = curr->children[idx];
     }
+    curr->isWord = true;
+  }
 
-    bool search(string word)
-    {
-        Trie *curr = this;
-        for (int i = 0; i < word.size(); i++)
-        {
-            int idx = word[i] - 'a';
-            curr = curr->children[idx];
-            if (!curr)
-                return false;
-        }
-        return curr->isWord;
+  bool search(string word) {
+    Trie *curr = this;
+    for (int i = 0; i < word.size(); i++) {
+      int idx = word[i] - 'a';
+      curr = curr->children[idx];
+      if (!curr)
+        return false;
     }
-    bool startsWith(string prefix)
-    {
-        Trie *curr = this;
-        for (int i = 0; i < prefix.size(); i++)
-        {
+    return curr->isWord;
+  }
+  bool startsWith(string prefix) {
+    Trie *curr = this;
+    for (int i = 0; i < prefix.size(); i++) {
 
-            int idx = prefix[i] - 'a';
-            curr = curr->children[idx];
-            if (!curr)
-                return false;
-        }
-        return true;
+      int idx = prefix[i] - 'a';
+      curr = curr->children[idx];
+      if (!curr)
+        return false;
     }
+    return true;
+  }
 };
 
 /**
