@@ -56,7 +56,7 @@ using namespace std;
 
 // @lc code=start
 class Solution {
- private:
+private:
   vector<string> res;
 
   void dfs(int idx, string s) {
@@ -72,7 +72,7 @@ class Solution {
     }
   }
 
- public:
+public:
   vector<string> letterCasePermutation(string s) {
     dfs(0, s);
     return res;
