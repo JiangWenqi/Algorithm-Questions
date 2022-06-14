@@ -1,0 +1,91 @@
+#include << vector>>
+/*
+ * @lc app=leetcode id=33 lang=cpp
+ *
+ * [33] Search in Rotated Sorted Array
+ *
+ * https://leetcode.com/problems/search-in-rotated-sorted-array/description/
+ *
+ * algorithms
+ * Medium (37.98%)
+ * Likes:    14908
+ * Dislikes: 934
+ * Total Accepted:    1.5M
+ * Total Submissions: 4M
+ * Testcase Example:  '[4,5,6,7,0,1,2]\n0'
+ *
+ * There is an integer array nums sorted in ascending order (with distinct
+ * values).
+ *
+ * Prior to being passed to your function, nums is possibly rotated at an
+ * unknown pivot index k (1 <= k < nums.length) such that the resulting array
+ * is [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]]
+ * (0-indexed). For example, [0,1,2,4,5,6,7] might be rotated at pivot index 3
+ * and become [4,5,6,7,0,1,2].
+ *
+ * Given the array nums after the possible rotation and an integer target,
+ * return the index of target if it is in nums, or -1 if it is not in nums.
+ *
+ * You must write an algorithm with O(log n) runtime complexity.
+ *
+ *
+ * Example 1:
+ * Input: nums = [4,5,6,7,0,1,2], target = 0
+ * Output: 4
+ * Example 2:
+ * Input: nums = [4,5,6,7,0,1,2], target = 3
+ * Output: -1
+ * Example 3:
+ * Input: nums = [1], target = 0
+ * Output: -1
+ *
+ *
+ * Constraints:
+ *
+ *
+ * 1 <= nums.length <= 5000
+ * -10^4 <= nums[i] <= 10^4
+ * All values of nums are unique.
+ * nums is an ascending array that is possibly rotated.
+ * -10^4 <= target <= 10^4
+ *
+ *
+ */
+
+// @lc code=start
+class Solution {
+public:
+  int search(vector<int> &nums, int target) {
+    int n = nums.size();
+    if (n == 0)
+      return -1;
+
+    int l = 0, r = n - 1;
+    while (l < r) {
+      int mid = (l + r) >> 1;
+      if (nums[mid] >= nums[0]) { // mid 在数组前半部分。
+        if (target > nums[mid])
+          // 可以推出 target 的值一定大于 nums[0]，target 只可能在 [mid + 1, r] 中。
+          l = mid + 1;
+        if (target < nums[0])
+          // 可以推出 target 的值一定小于 nums[mid]，target只可能在 [mid + 1, r] 中。
+          l = mid + 1;
+        if (target <= nums[mid] && target >= nums[0])
+          // 此时 target 的值处于 nums[0] 和 nums[mid] 中，故可能在 [l, mid] 中。
+          r = mid;
+      } else { // mid在数组后半部分
+        if (target >= nums[0])
+          // 可以推出 target 的值一定大于 nums[mid]，target只可能在 [l, mid] 中。
+          r = mid;
+        if (target <= nums[mid])
+          // 可以推出 target 的值一定小于 nums[0]，target只可能在 [l, mid] 中。
+          r = mid;
+        if (target > nums[mid] && target < nums[0])
+          // 此时 target 的值处于 nums[0] 和 nums[mid] 中，故可能在 [mid + 1, r] 中。
+          l = mid + 1;
+      }
+    }
+    return nums[l] == target ? l : -1;
+  }
+};
+// @lc code=end
