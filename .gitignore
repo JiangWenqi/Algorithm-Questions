@@ -2,7 +2,7 @@
 .DS_Store
 .idea
 out
-leetcode_solutions.iml
 .vscode
+*Leetcode-Solutions.iml
 
 .VSCodeCounter
