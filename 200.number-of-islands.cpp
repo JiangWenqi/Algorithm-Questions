@@ -1,6 +1,7 @@
 // @before-stub-for-debug-begin
-#include <vector>
 #include <string>
+#include <vector>
+
 #include "commoncppproblem200.h"
 
 using namespace std;
@@ -19,7 +20,8 @@ using namespace std;
  * Dislikes: 332
  * Total Accepted:    1.6M
  * Total Submissions: 2.9M
- * Testcase Example:  '[["1","1","1","1","0"],["1","1","0","1","0"],["1","1","0","0","0"],["0","0","0","0","0"]]'
+ * Testcase Example:
+ * '[["1","1","1","1","0"],["1","1","0","1","0"],["1","1","0","0","0"],["0","0","0","0","0"]]'
  *
  * Given an m x n 2D binary grid grid which represents a map of '1's (land) and
  * '0's (water), return the number of islands.
@@ -66,40 +68,33 @@ using namespace std;
  */
 
 // @lc code=start
-class Solution
-{
-private:
-    int dirs[5] = {0, 1, 0, -1, 0};
-    int res, m, n;
+class Solution {
+ private:
+  int dirs[5] = {0, 1, 0, -1, 0};
+  int res, m, n;
 
-    void dfs(int x, int y, vector<vector<char>> &grid)
-    {
-        grid[x][y] = '0';
-        for (int i = 0; i < 4; i++)
-        {
-            int nx = x + dirs[i], ny = y + dirs[i + 1];
-            if (nx >= 0 && nx < m && ny >= 0 && ny < n && grid[nx][ny] == '1')
-                dfs(nx, ny, grid);
-        }
+  void dfs(int x, int y, vector<vector<char>> &grid) {
+    grid[x][y] = '0';
+    for (int i = 0; i < 4; i++) {
+      int nx = x + dirs[i], ny = y + dirs[i + 1];
+      if (nx >= 0 && nx < m && ny >= 0 && ny < n && grid[nx][ny] == '1')
+        dfs(nx, ny, grid);
     }
+  }
 
-public:
-    int numIslands(vector<vector<char>> &grid)
-    {
-        res = 0, m = grid.size(), n = grid[0].size();
+ public:
+  int numIslands(vector<vector<char>> &grid) {
+    res = 0, m = grid.size(), n = grid[0].size();
 
-        for (int i = 0; i < m; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
-                if (grid[i][j] == '1')
-                {
-                    res++;
-                    dfs(i, j, grid);
-                }
-            }
+    for (int i = 0; i < m; i++) {
+      for (int j = 0; j < n; j++) {
+        if (grid[i][j] == '1') {
+          res++;
+          dfs(i, j, grid);
         }
-        return res;
+      }
     }
+    return res;
+  }
 };
 // @lc code=end

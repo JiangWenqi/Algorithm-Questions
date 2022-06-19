@@ -1,7 +1,8 @@
 // @before-stub-for-debug-begin
-#include "commoncppproblem547.h"
 #include <string>
 #include <vector>
+
+#include "commoncppproblem547.h"
 
 using namespace std;
 // @before-stub-for-debug-end
@@ -66,29 +67,25 @@ using namespace std;
 // @lc code=start
 const int N = 210;
 class Solution {
-private:
+ private:
   int p[N];
   int find(int x) {
-    if (p[x] != x)
-      p[x] = find(p[x]);
+    if (p[x] != x) p[x] = find(p[x]);
     return p[x];
   }
 
-public:
+ public:
   int findCircleNum(vector<vector<int>> &isConnected) {
     int n = isConnected.size();
-    for (int i = 0; i < n; i++)
-      p[i] = i;
+    for (int i = 0; i < n; i++) p[i] = i;
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < isConnected[i].size(); j++) {
-        if (isConnected[i][j])
-          p[find(i)] = find(j);
+        if (isConnected[i][j]) p[find(i)] = find(j);
       }
     }
     int res = 0;
     for (int i = 0; i < n; i++) {
-      if (p[i] == i)
-        res++;
+      if (p[i] == i) res++;
     }
     return res;
   }
