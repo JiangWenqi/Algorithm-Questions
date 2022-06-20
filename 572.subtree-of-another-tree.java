@@ -77,7 +77,8 @@ class Solution {
     public boolean isSubtree(TreeNode root, TreeNode subRoot) {
         if (root == null)
             return subRoot == null;
-        return check(root, subRoot) || isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+        else
+            return check(root, subRoot) || isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
     }
 }
 // @lc code=end
