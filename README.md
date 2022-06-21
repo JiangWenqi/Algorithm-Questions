@@ -242,3 +242,24 @@ p[find(a)] = find(b);
 d[find(a)] = distance; // 根据具体问题，初始化find(a)的偏移量
 
 ```
+
+## KMP
+```cpp
+int strStr(string text, string pattern) {
+int m = text.size(), n = pattern.size();
+text = ' ' + text, pattern = ' ' + pattern;
+vector<int> next(n + 1);
+for (int i = 2, j = 0; i <= n; i++) {
+    while (j && pattern[j + 1] != pattern[i]) j = next[j];
+    if (pattern[i] == pattern[j + 1]) j++;
+    next[i] = j;
+}
+for (int i = 1, j = 0; i <= m; i++) {
+    while (j && text[i] != pattern[j + 1]) j = next[j];
+    if (text[i] == pattern[j + 1]) j++;
+    if (j == n) return i - n;
+}
+return -1;
+}
+
+```
