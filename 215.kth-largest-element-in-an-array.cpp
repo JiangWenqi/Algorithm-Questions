@@ -59,7 +59,7 @@ class Solution {
       while (nums[j] < x);
       if (i < j) swap(nums[i], nums[j]);
     }
-    if (k < i)
+    if (k <= j)
       return quickSort(l, j, nums, k);
     else
       return quickSort(j + 1, r, nums, k);
