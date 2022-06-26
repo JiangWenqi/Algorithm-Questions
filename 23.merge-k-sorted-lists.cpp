@@ -1,6 +1,7 @@
 // @before-stub-for-debug-begin
-#include <vector>
 #include <string>
+#include <vector>
+
 #include "commoncppproblem23.h"
 
 using namespace std;
@@ -81,64 +82,49 @@ using namespace std;
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-class Solution
-{
-private:
-    ListNode *mergeLists(ListNode *a, ListNode *b)
-    {
-        ListNode *dummy = new ListNode(-1);
-        ListNode *prev = dummy;
-        while (a && b)
-        {
-            if (a->val < b->val)
-            {
-                prev->next = a;
-                a = a->next;
-            }
-            else
-            {
-                prev->next = b;
-                b = b->next;
-            }
-            prev = prev->next;
-        }
-        while (a)
-        {
-            prev->next = a;
-            a = a->next;
-            prev = prev->next;
-        }
-        while (b)
-        {
-            prev->next = b;
-            b = b->next;
-            prev = prev->next;
-        }
-        return dummy->next;
+class Solution {
+ private:
+  ListNode *mergeLists(ListNode *a, ListNode *b) {
+    ListNode *dummy = new ListNode(-1);
+    ListNode *prev = dummy;
+    while (a && b) {
+      if (a->val < b->val) {
+        prev->next = a;
+        a = a->next;
+      } else {
+        prev->next = b;
+        b = b->next;
+      }
+      prev = prev->next;
     }
-
-public:
-    ListNode *mergeKLists(vector<ListNode *> &lists)
-    {
-        int k = lists.size();
-        if (k == 0)
-        {
-            return NULL;
-        }
-        else if (k == 1)
-        {
-            return lists[0];
-        }
-        else
-        {
-            ListNode *res = lists[0];
-
-            for (int i = 1; i < k; i++)
-            {
-                res = mergeLists(res, lists[i]);
-            }
-            return res;
-        }
+    while (a) {
+      prev->next = a;
+      a = a->next;
+      prev = prev->next;
     }
+    while (b) {
+      prev->next = b;
+      b = b->next;
+      prev = prev->next;
+    }
+    return dummy->next;
+  }
+
+ public:
+  ListNode *mergeKLists(vector<ListNode *> &lists) {
+    int k = lists.size();
+    if (k == 0) {
+      return NULL;
+    } else if (k == 1) {
+      return lists[0];
+    } else {
+      ListNode *res = lists[0];
+
+      for (int i = 1; i < k; i++) {
+        res = mergeLists(res, lists[i]);
+      }
+      return res;
+    }
+  }
 };
 // @lc code=end
