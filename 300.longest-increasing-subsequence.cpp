@@ -67,9 +67,9 @@ using namespace std;
  *
  */
 
-// @lc code=start
+ // @lc code=start
 class Solution {
- public:
+public:
   int lengthOfLIS(vector<int>& nums) {
     int n = nums.size(), res = 1;
     vector<int> dp(n, 1);

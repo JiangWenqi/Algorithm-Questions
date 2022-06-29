@@ -53,9 +53,9 @@ using namespace std;
  *
  */
 
-// @lc code=start
+ // @lc code=start
 class Solution {
- private:
+private:
   vector<vector<int>> res;
   vector<int> path;
   vector<bool> visited;
@@ -76,7 +76,7 @@ class Solution {
     }
   }
 
- public:
+public:
   vector<vector<int>> permuteUnique(vector<int>& nums) {
     int n = nums.size();
     sort(nums.begin(), nums.end());

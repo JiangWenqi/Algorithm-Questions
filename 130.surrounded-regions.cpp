@@ -63,10 +63,10 @@ using namespace std;
  *
  */
 
-// @lc code=start
+ // @lc code=start
 class Solution {
- private:
-  int dirs[5] = {0, 1, 0, -1, 0};
+private:
+  int dirs[5] = { 0, 1, 0, -1, 0 };
   int m, n;
   vector<vector<bool>> visited;
   void dfs(int x, int y, vector<vector<char>>& board) {
@@ -80,7 +80,7 @@ class Solution {
     }
   }
 
- public:
+public:
   void solve(vector<vector<char>>& board) {
     m = board.size(), n = board[0].size();
     visited = vector<vector<bool>>(m, vector<bool>(n, false));

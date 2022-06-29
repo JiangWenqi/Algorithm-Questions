@@ -56,9 +56,9 @@ using namespace std;
  *
  */
 
-// @lc code=start
+ // @lc code=start
 class Solution {
- public:
+public:
   int findNumberOfLIS(vector<int>& nums) {
     int n = nums.size();
     vector<int> f(n), g(n);
