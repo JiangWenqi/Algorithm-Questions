@@ -46,7 +46,7 @@
  *
  */
 
-// @lc code=start
+ // @lc code=start
 class Solution {
 public:
   int minDistance(string word1, string word2) {
