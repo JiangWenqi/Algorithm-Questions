@@ -1,4 +1,12 @@
-#include << vector>>
+// @before-stub-for-debug-begin
+#include <vector>
+#include <string>
+#include "commoncppproblem33.h"
+
+using namespace std;
+// @before-stub-for-debug-end
+
+
 /*
  * @lc app=leetcode id=33 lang=cpp
  *
@@ -52,40 +60,34 @@
  *
  */
 
-// @lc code=start
+ // @lc code=start
 class Solution {
 public:
-  int search(vector<int> &nums, int target) {
-    int n = nums.size();
-    if (n == 0)
-      return -1;
-
-    int l = 0, r = n - 1;
-    while (l < r) {
-      int mid = (l + r) >> 1;
-      if (nums[mid] >= nums[0]) { // mid 在数组前半部分。
-        if (target > nums[mid])
-          // 可以推出 target 的值一定大于 nums[0]，target 只可能在 [mid + 1, r] 中。
+ 
+  int search(vector<int>& nums, int target) {
+    int n = nums.size(), l = 0, r = n - 1;
+    while (l <= r) {
+      int mid = l + r >> 1;
+      if (nums[mid] == target) {
+        return mid;
+      }
+      // 4,5,6,7,0,1,2 target = 0
+      if (nums[mid] >= nums[l]) {
+        if (target < nums[mid] && target >= nums[l]) {
+          r = mid - 1;
+        } else {
           l = mid + 1;
-        if (target < nums[0])
-          // 可以推出 target 的值一定小于 nums[mid]，target只可能在 [mid + 1, r] 中。
+        }
+      } else {
+        // 5,6,7,0,1,2,3,4 target = 3
+        if (target > nums[mid] && target <= nums[r]) {
           l = mid + 1;
-        if (target <= nums[mid] && target >= nums[0])
-          // 此时 target 的值处于 nums[0] 和 nums[mid] 中，故可能在 [l, mid] 中。
-          r = mid;
-      } else { // mid在数组后半部分
-        if (target >= nums[0])
-          // 可以推出 target 的值一定大于 nums[mid]，target只可能在 [l, mid] 中。
-          r = mid;
-        if (target <= nums[mid])
-          // 可以推出 target 的值一定小于 nums[0]，target只可能在 [l, mid] 中。
-          r = mid;
-        if (target > nums[mid] && target < nums[0])
-          // 此时 target 的值处于 nums[0] 和 nums[mid] 中，故可能在 [mid + 1, r] 中。
-          l = mid + 1;
+        } else {
+          r = mid - 1;
+        }
       }
     }
-    return nums[l] == target ? l : -1;
+    return -1;
   }
 };
 // @lc code=end
