@@ -12,19 +12,14 @@
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
-        ListNode newHead = null;
-        while (head != null) {
-            // 1. 找到next节点
-            ListNode next = head.next;
-            // 2. 把当前节点的指针指向上一个节点
-            head.next = newHead;
-            // 3. 上一个节点往后挪
-            newHead = head;
-            // 4. 当前节点也往后挪
-            head = next;
-
+        ListNode prev = null, curr = head, next;
+        while (curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
         }
-        return newHead;
+        return prev;
     }
 }
 // @lc code=end
