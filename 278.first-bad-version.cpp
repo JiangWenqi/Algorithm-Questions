@@ -54,18 +54,15 @@
  *
  */
 
-// @lc code=start
-// The API isBadVersion is defined for you.
-// bool isBadVersion(int version);
+ // @lc code=start
+ // The API isBadVersion is defined for you.
+ // bool isBadVersion(int version);
 
-class Solution
-{
+class Solution {
 public:
-    int firstBadVersion(int n)
-    {
+    int firstBadVersion(int n) {
         long l = 1, r = n;
-        while (l < r)
-        {
+        while (l < r) {
             long mid = l + r >> 1;
             if (isBadVersion(mid))
                 r = mid;

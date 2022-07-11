@@ -11,17 +11,14 @@
 public class Solution extends VersionControl {
     public int firstBadVersion(int n) {
         int left = 1, right = n;
-        int bad = 0;
-        while (left <= right) {
+        while (left < right) {
             int mid = left + (right - left) / 2;
-            if (isBadVersion(mid)) {
-                bad = mid;
-                right = mid - 1;
-            } else {
+            if (isBadVersion(mid))
+                right = mid;
+            else
                 left = mid + 1;
-            }
         }
-        return bad;
+        return left;
     }
 }
 // @lc code=end
