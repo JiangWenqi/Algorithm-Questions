@@ -60,28 +60,29 @@ using namespace std;
  // @lc code=start
 class Solution {
 private:
-
-    vector<int> visited;
-    bool backtracking(int idx, int currSum, int targetSum, int currEdge, vector<int>& matchsticks) {
-        // Trick: only need 3 edges equal target
-        if (currEdge == 3) return true;
-        else if (currSum == targetSum) return backtracking(0, 0, targetSum, currEdge + 1, matchsticks);
-        for (int i = idx; i < matchsticks.size(); i++) {
-            if (visited[i] || currSum + matchsticks[i] > targetSum) continue;
-            visited[i] = true;
-            if (backtracking(i + 1, currSum + matchsticks[i], targetSum, currEdge, matchsticks)) return true;
-            visited[i] = false;
+    vector<bool> visited;
+    bool backtracking(int edge, int idx, int currSum, int targetSum, vector<int>& matchsticks) {
+        // only need 3 edges equal target is enough
+        if (edge == 3) return true;
+        else if (currSum == targetSum) return backtracking(edge + 1, 0, 0, targetSum, matchsticks);
+        else {
+            for (int i = idx; i < matchsticks.size(); i++) {
+                if (visited[i] || matchsticks[i] + currSum > targetSum) continue;
+                visited[i] = true;
+                if (backtracking(edge, i + 1, matchsticks[i] + currSum, targetSum, matchsticks)) return true;
+                visited[i] = false;
+            }
+            return false;
         }
-        return false;
     }
+
 public:
     bool makesquare(vector<int>& matchsticks) {
-        int n = matchsticks.size();
-        visited.resize(n, false);
         int sum = 0;
         for (int& matchstick : matchsticks) sum += matchstick;
-        if (sum % 4) return false;
-        return backtracking(0, 0, sum / 4, 0, matchsticks);
+        if (sum % 4)return false;
+        visited.resize(matchsticks.size(), false);
+        return backtracking(0, 0, 0, sum / 4, matchsticks);
     }
 };
 // @lc code=end
