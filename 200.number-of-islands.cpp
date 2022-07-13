@@ -67,13 +67,13 @@ using namespace std;
  *
  */
 
-// @lc code=start
+ // @lc code=start
 class Solution {
- private:
-  int dirs[5] = {0, 1, 0, -1, 0};
+private:
+  int dirs[5] = { 0, 1, 0, -1, 0 };
   int res, m, n;
 
-  void dfs(int x, int y, vector<vector<char>> &grid) {
+  void dfs(int x, int y, vector<vector<char>>& grid) {
     grid[x][y] = '0';
     for (int i = 0; i < 4; i++) {
       int nx = x + dirs[i], ny = y + dirs[i + 1];
@@ -82,8 +82,8 @@ class Solution {
     }
   }
 
- public:
-  int numIslands(vector<vector<char>> &grid) {
+public:
+  int numIslands(vector<vector<char>>& grid) {
     res = 0, m = grid.size(), n = grid[0].size();
 
     for (int i = 0; i < m; i++) {
