@@ -48,22 +48,31 @@ import java.util.List;
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums);
-        int n = nums.length;
         List<List<Integer>> res = new ArrayList<>();
+        int n = nums.length;
         for (int i = 0; i < n - 2; i++) {
-            if (i > 0 && nums[i] == nums[i - 1])
+            // make sure the smallest number is smaller than 0
+            if (nums[i] > 0)
                 continue;
-            for (int l = i + 1, r = n - 1; l < r; l++) {
-                if (l > i + 1 && nums[l] == nums[l - 1])
-                    continue;
-                while (l < r - 1 && nums[i] + nums[l] + nums[r - 1] >= 0)
+            // pass the duplicate numbers
+            else if (i > 0 && nums[i] == nums[i - 1])
+                continue;
+            int l = i + 1, r = n - 1;
+            while (l < r) {
+                int sum = nums[i] + nums[l] + nums[r];
+                if (sum > 0) {
                     r--;
-                if (nums[i] + nums[l] + nums[r] == 0) {
-                    List<Integer> three = new ArrayList<>();
-                    three.add(nums[i]);
-                    three.add(nums[l]);
-                    three.add(nums[r]);
-                    res.add(three);
+                } else if (sum < 0) {
+                    l++;
+                } else {
+                    res.add(Arrays.asList(nums[i], nums[l], nums[r]));
+                    l++;
+                    r--;
+                    // pass the duplicate numbers
+                    while (l < r && nums[l] == nums[l - 1])
+                        l++;
+                    while (l < r && nums[r] == nums[r + 1])
+                        r--;
                 }
 
             }
