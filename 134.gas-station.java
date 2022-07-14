@@ -1,42 +1,34 @@
-// @before-stub-for-debug-begin
-#include <vector>
-#include <string>
-#include "commoncppproblem134.h"
-
-using namespace std;
-// @before-stub-for-debug-end
-
 /*
- * @lc app=leetcode id=134 lang=cpp
+ * @lc app=leetcode id=134 lang=java
  *
  * [134] Gas Station
  *
  * https://leetcode.com/problems/gas-station/description/
  *
  * algorithms
- * Medium (44.51%)
- * Likes:    5956
- * Dislikes: 616
- * Total Accepted:    414.4K
- * Total Submissions: 931K
+ * Medium (44.66%)
+ * Likes:    6315
+ * Dislikes: 632
+ * Total Accepted:    429.8K
+ * Total Submissions: 962.4K
  * Testcase Example:  '[1,2,3,4,5]\n[3,4,5,1,2]'
  *
  * There are n gas stations along a circular route, where the amount of gas at
  * the i^th station is gas[i].
- *
+ * 
  * You have a car with an unlimited gas tank and it costs cost[i] of gas to
  * travel from the i^th station to its next (i + 1)^th station. You begin the
  * journey with an empty tank at one of the gas stations.
- *
+ * 
  * Given two integer arrays gas and cost, return the starting gas station's
  * index if you can travel around the circuit once in the clockwise direction,
  * otherwise return -1. If there exists a solution, it is guaranteed to be
  * unique
- *
- *
+ * 
+ * 
  * Example 1:
- *
- *
+ * 
+ * 
  * Input: gas = [1,2,3,4,5], cost = [3,4,5,1,2]
  * Output: 3
  * Explanation:
@@ -49,11 +41,11 @@ using namespace std;
  * Travel to station 3. The cost is 5. Your gas is just enough to travel back
  * to station 3.
  * Therefore, return 3 as the starting index.
- *
- *
+ * 
+ * 
  * Example 2:
- *
- *
+ * 
+ * 
  * Input: gas = [2,3,4], cost = [3,4,3]
  * Output: -1
  * Explanation:
@@ -67,36 +59,35 @@ using namespace std;
  * only have 3.
  * Therefore, you can't travel around the circuit once no matter where you
  * start.
- *
- *
- *
+ * 
+ * 
+ * 
  * Constraints:
- *
- *
+ * 
+ * 
  * n == gas.length == cost.length
  * 1 <= n <= 10^5
  * 0 <= gas[i], cost[i] <= 10^4
- *
- *
+ * 
+ * 
  */
 
- // @lc code=start
+// @lc code=start
 class Solution {
-public:
-    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
-        int n = gas.size(), start = 0, curr = 0, total = 0;
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        int tot = 0, curr = 0, n = gas.length, res = 0;
         for (int i = 0; i < n; i++) {
-            int left = gas[i] - cost[i];
-            curr += left;
-            total += left;
+            curr += gas[i] - cost[i];
+            tot += gas[i] - cost[i];
+            // find the start stop
             if (curr < 0) {
                 curr = 0;
-                start = i + 1;
+                // from next stop
+                res = i + 1;
             }
         }
-        if (start == n)
-            start = 0;
-        return total >= 0 ? start : -1;
+  
+        return tot >= 0 ? res : -1;
     }
-};
+}
 // @lc code=end

@@ -53,9 +53,9 @@ public:
         int res = 0;
         for (int i = 0; i < nums.size(); i++) {
             if (!hash.count(nums[i] - 1)) {
-                int cur = 1;
-                while (hash.count(nums[i] + cur)) cur++;
-                res = max(res, cur);
+                int cnt = 1;
+                while (hash.count(nums[i] + cnt)) cnt++;
+                res = max(res, cnt);
             }
         }
         return res;
