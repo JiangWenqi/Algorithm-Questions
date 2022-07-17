@@ -61,13 +61,13 @@ using namespace std;
  *
  */
 
-// @lc code=start
+ // @lc code=start
 class Solution {
- public:
+public:
   vector<int> findAnagrams(string s, string p) {
     vector<int> res;
     unordered_map<char, int> cnt;
-    for (char &c : p) cnt[c]++;
+    for (char& c : p) cnt[c]++;
     int satisfy = 0, tot = cnt.size();
     for (int i = 0, j = 0; i < s.size(); i++) {
       if (--cnt[s[i]] == 0) satisfy++;
