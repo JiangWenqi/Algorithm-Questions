@@ -56,9 +56,9 @@
  *
  */
 
-// @lc code=start
+ // @lc code=start
 class Solution {
- private:
+private:
   string get(string& s) {
     string res;
     for (auto c : s)
@@ -70,7 +70,7 @@ class Solution {
     return res;
   }
 
- public:
+public:
   bool backspaceCompare(string s, string t) { return get(s) == get(t); }
 };
 // @lc code=end
