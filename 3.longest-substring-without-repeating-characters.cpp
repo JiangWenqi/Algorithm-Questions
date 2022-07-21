@@ -63,9 +63,9 @@ using namespace std;
  *
  */
 
-// @lc code=start
+ // @lc code=start
 class Solution {
- public:
+public:
   int lengthOfLongestSubstring(string s) {
     unordered_map<char, int> m;
     int res = 0;
