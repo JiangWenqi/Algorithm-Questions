@@ -64,20 +64,35 @@ using namespace std;
  // @lc code=start
 class Solution {
 public:
-  vector<int> findAnagrams(string s, string p) {
-    vector<int> res;
-    unordered_map<char, int> cnt;
-    for (char& c : p) cnt[c]++;
-    int satisfy = 0, tot = cnt.size();
-    for (int i = 0, j = 0; i < s.size(); i++) {
-      if (--cnt[s[i]] == 0) satisfy++;
-      if (i - j + 1 > p.size()) {
-        if (cnt[s[j]] == 0) satisfy--;
-        cnt[s[j++]]++;
+  /**
+    vector<int> findAnagrams(string s, string p) {
+      vector<int> res;
+      unordered_map<char, int> cnt;
+      for (char& c : p) cnt[c]++;
+      int satisfy = 0, tot = cnt.size();
+      for (int i = 0, j = 0; i < s.size(); i++) {
+        if (--cnt[s[i]] == 0) satisfy++;
+        if (i - j + 1 > p.size()) {
+          if (cnt[s[j]] == 0) satisfy--;
+          cnt[s[j++]]++;
+        }
+        if (satisfy == tot) res.push_back(j);
       }
-      if (satisfy == tot) res.push_back(j);
+      return res;
+    }
+    */
+
+  vector<int> findAnagrams(string s, string p) {
+    vector<int> curr(26, 0), target(26, 0), res;
+    int m = s.size(), n = p.size();
+    for (char& c : p) target[c - 'a']++;
+    for (int i = 0; i < m; i++) {
+      curr[s[i] - 'a']++;
+      if (i >= n) curr[s[i - n] - 'a']--;
+      if (curr == target) res.push_back(i - n + 1);
     }
     return res;
   }
+
 };
 // @lc code=end
