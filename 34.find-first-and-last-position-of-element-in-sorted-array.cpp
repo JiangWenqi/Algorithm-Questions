@@ -44,33 +44,35 @@
  *
  */
 
-// @lc code=start
+ // @lc code=start
 class Solution {
 public:
-  vector<int> searchRange(vector<int> &nums, int target) {
-    int n = nums.size(), l = 0, r = n - 1, start = -1, end = -1;
-    if (n == 0)
-      return {-1, -1};
+  vector<int> searchRange(vector<int>& nums, int target) {
+    int n = nums.size(), l, r;
+    vector<int> res(2, -1);
+    // 1. empty nums
+    if (n == 0) return res;
+    // find the first number bigger than target
+    l = 0, r = n - 1;
     while (l < r) {
       int mid = l + r >> 1;
-      if (nums[mid] >= target)
-        r = mid;
-      else
-        l = mid + 1;
+      if (nums[mid] >= target) r = mid;
+      else l = mid + 1;
     }
-    if (nums[l] != target)
-      return {-1, -1};
-    start = l;
+    // 2. cant find target in nums
+    if (nums[l] != target) return res;
+
+    res[0] = l;
+
+    // find the last number smaller than target
     l = 0, r = n - 1;
     while (l < r) {
       int mid = l + r + 1 >> 1;
-      if (nums[mid] <= target)
-        l = mid;
-      else
-        r = mid - 1;
+      if (nums[mid] <= target) l = mid;
+      else r = mid - 1;
     }
-    end = l;
-    return {start, end};
+    res[1] = l;
+    return res;
   }
 };
 // @lc code=end
