@@ -49,24 +49,27 @@
  *
  */
 
-// @lc code=start
+ // @lc code=start
 class Solution {
 public:
-  bool searchMatrix(vector<vector<int>> &matrix, int target) {
-    if (matrix.empty() || matrix[0].empty())
-      return false;
-    int n = matrix.size(), m = matrix[0].size();
-
-    int l = 0, r = n * m - 1;
-    while (l < r) {
-      int mid = l + r >> 1;
-      if (matrix[mid / m][mid % m] >= target)
-        r = mid;
-      else
-        l = mid + 1;
+  bool searchMatrix(vector<vector<int>>& matrix, int target) {
+    int m = matrix.size(), n = matrix[0].size();
+    int top = 0, bottom = m - 1;
+    while (top < bottom) {
+      int mid = top + bottom >> 1;
+      if (matrix[mid][n - 1] >= target) bottom = mid;
+      else top = mid + 1;
     }
 
-    return matrix[r / m][r % m] == target;
+    int l = 0, r = n - 1;
+    while (l < r) {
+      int mid = l + r >> 1;
+      if (matrix[top][mid] >= target) r = mid;
+      else l = mid + 1;
+    }
+
+    return matrix[top][l] == target;
   }
+
 };
 // @lc code=end
