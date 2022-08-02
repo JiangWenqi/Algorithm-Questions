@@ -1,3 +1,11 @@
+// @before-stub-for-debug-begin
+#include <vector>
+#include <string>
+#include "commoncppproblem79.h"
+
+using namespace std;
+// @before-stub-for-debug-end
+
 /*
  * @lc app=leetcode id=79 lang=cpp
  *
@@ -63,34 +71,33 @@
  *
  */
 
-// @lc code=start
+ // @lc code=start
 class Solution {
- public:
-  bool exist(vector<vector<char>>& board, string word) {
-    for (int i = 0; i < board.size(); i++) {
-      for (int j = 0; j < board[i].size(); j++) {
-        if (dfs(board, word, 0, i, j)) return true;
+private:
+  int dirs[5] = { 0, 1, 0,-1,0 };
+  bool dfs(vector<vector<char>>& board, string word, int x, int y, int idx) {
+    if (board[x][y] != word[idx]) return false;
+    if (idx == word.size() - 1) return true;
+    char ogi = board[x][y];
+    board[x][y] = '*';
+    for (int i = 0; i < 4; i++) {
+      int dx = x + dirs[i], dy = y + dirs[i + 1];
+      if (dx >= 0 && dx < board.size() && dy >= 0 && dy < board[0].size()) {
+        if (dfs(board, word, dx, dy, idx + 1)) return true;
       }
     }
+    board[x][y] = ogi;
     return false;
   }
 
-  int dx[4] = {-1, 0, 1, 0}, dy[4] = {0, 1, 0, -1};
-
-  bool dfs(vector<vector<char>>& board, string& word, int u, int x, int y) {
-    if (board[x][y] != word[u]) return false;
-    if (u == word.size() - 1) return true;
-
-    char t = board[x][y];
-    board[x][y] = '.';
-    for (int i = 0; i < 4; i++) {
-      int a = x + dx[i], b = y + dy[i];
-      if (a < 0 || a >= board.size() || b < 0 || b >= board[0].size() ||
-          board[a][b] == '.')
-        continue;
-      if (dfs(board, word, u + 1, a, b)) return true;
+public:
+  bool exist(vector<vector<char>>& board, string word) {
+    int m = board.size(), n = board[0].size();
+    for (int i = 0; i < m; i++) {
+      for (int j = 0; j < n; j++) {
+        if (dfs(board, word, i, j, 0)) return true;
+      }
     }
-    board[x][y] = t;
     return false;
   }
 };
