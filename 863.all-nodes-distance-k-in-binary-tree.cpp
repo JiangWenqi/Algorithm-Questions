@@ -107,3 +107,30 @@ public:
 };
 // @lc code=end
 
+#include <iostream>
+#include <vector>
+#include <string>
+#include <unordered_map>
+
+using namespace std;
+
+string getShortestUniqueSubstring(const vector<char>& arr, const string& str) {
+    unordered_map<char, int> hs, ht;
+    for (auto& c : arr) ht[c]++;
+    int cnt = 0;
+    string res;
+    for (int i = 0, j = 0; i < str.size(); i++) {
+        hs[str[i]] ++;
+        if (hs[str[i]] <= ht[str[i]]) cnt++;
+        while (hs[str[j]] > ht[str[j]]) hs[str[j++]]--;
+        if (cnt == arr.size()) {
+            if (res.empty() || i - j + 1 < res.size())
+                res = str.substr(j, i - j + 1);
+        }
+    }
+    return res;
+}
+
+int main() {
+    return 0;
+}
