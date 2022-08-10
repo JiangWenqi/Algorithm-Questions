@@ -54,9 +54,9 @@ using namespace std;
  *
  */
 
-// @lc code=start
+ // @lc code=start
 class Solution {
- private:
+private:
   vector<int> path;
   vector<vector<int>> res;
 
@@ -72,7 +72,7 @@ class Solution {
     }
   }
 
- public:
+public:
   vector<vector<int>> subsets(vector<int>& nums) {
     for (int length = 0; length <= nums.size(); length++)
       backtracking(0, length, nums);

@@ -38,13 +38,13 @@
  *
  */
 
-// @lc code=start
+ // @lc code=start
 class Solution {
- private:
+private:
   vector<int> path;
   vector<bool> visited;
   vector<vector<int>> res;
-  void dfs(int idx, vector<int> &nums) {
+  void dfs(int idx, vector<int>& nums) {
     if (idx == nums.size()) {
       res.push_back(path);
       return;
@@ -60,8 +60,8 @@ class Solution {
     }
   }
 
- public:
-  vector<vector<int>> permute(vector<int> &nums) {
+public:
+  vector<vector<int>> permute(vector<int>& nums) {
     int n = nums.size();
     path.resize(n);
     visited.resize(n);

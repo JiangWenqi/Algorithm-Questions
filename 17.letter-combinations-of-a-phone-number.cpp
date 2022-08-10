@@ -60,9 +60,9 @@ using namespace std;
  *
  */
 
-// @lc code=start
+ // @lc code=start
 class Solution {
- private:
+private:
   vector<string> ans;
   string strs[10] = {
       "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz",
@@ -75,7 +75,7 @@ class Solution {
     }
   }
 
- public:
+public:
   vector<string> letterCombinations(string digits) {
     if (digits.empty()) return ans;
     dfs(digits, 0, "");
