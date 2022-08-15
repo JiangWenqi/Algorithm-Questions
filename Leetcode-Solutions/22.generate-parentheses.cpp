@@ -1,3 +1,11 @@
+// @before-stub-for-debug-begin
+#include <vector>
+#include <string>
+#include "commoncppproblem22.h"
+
+using namespace std;
+// @before-stub-for-debug-end
+
 /*
  * @lc app=leetcode id=22 lang=cpp
  *
@@ -33,23 +41,22 @@
  *
  */
 
-// @lc code=start
+ // @lc code=start
 class Solution {
- public:
-  vector<string> ans;
-
-  vector<string> generateParenthesis(int n) {
-    dfs(n, 0, 0, "");
-    return ans;
-  }
-
-  void dfs(int n, int lc, int rc, string seq) {
-    if (lc == n && rc == n)
-      ans.push_back(seq);
-    else {
-      if (lc < n) dfs(n, lc + 1, rc, seq + '(');
-      if (rc < n && lc > rc) dfs(n, lc, rc + 1, seq + ')');
+private:
+  vector<string> res;
+  void dfs(int l, int r, int n, string path) {
+    if (l == n && r == n) {
+      res.push_back(path);
+    } else {
+      if (l < n) dfs(l + 1, r, n, path + '(');
+      if (r < l) dfs(l, r + 1, n, path + ')');
     }
+  }
+public:
+  vector<string> generateParenthesis(int n) {
+    dfs(0, 0, n, "");
+    return res;
   }
 };
 
