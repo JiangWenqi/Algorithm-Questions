@@ -59,30 +59,68 @@
 
 // @lc code=start
 class Solution {
-    private int[] dirs = new int[] { 0, 1, 0, -1, 0 };
 
-    private void dfs(int x, int y, char[][] grid) {
-        for (int i = 0; i < 4; i++) {
-            int nx = x + dirs[i], ny = y + dirs[i + 1];
-            if (nx >= 0 && nx < grid.length && ny >= 0 && ny < grid[0].length && grid[nx][ny] == '1') {
-                grid[nx][ny] = '0';
-                dfs(nx, ny, grid);
-            }
-        }
-    }
+    private class UnionFind {
+        int[] p;
+        int count;
 
-    public int numIslands(char[][] grid) {
-        int res = 0;
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
-                if (grid[i][j] == '1') {
-                    grid[i][j] = '0';
-                    dfs(i, j, grid);
-                    res++;
+        public UnionFind(char[][] grid) {
+            int m = grid.length, n = grid[0].length;
+            p = new int[m * n];
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    int x = i * n + j;
+                    p[x] = x;
+                    if (grid[i][j] == '1') {
+                        count++;
+                    }
                 }
             }
         }
-        return res;
+
+        public int find(int x) {
+            if (p[x] != x) {
+                p[x] = find(p[x]);
+            }
+            return p[x];
+        }
+
+        public void union(int a, int b) {
+            int pA = find(a), pB = find(b);
+            if (pA != pB) {
+                count--;
+            }
+            p[pA] = pB;
+        }
+    }
+
+    public static final int[][] dirs = {
+            { -1, 0 }, // up
+            { 0, 1 }, // right
+            { 1, 0 }, // down
+            { 0, -1 } // left
+    };
+
+    public int numIslands(char[][] grid) {
+        UnionFind uf = new UnionFind(grid);
+        int rows = grid.length;
+        int cols = grid[0].length;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (grid[i][j] == '1') {
+                    for (int[] d : dirs) {
+                        int x = i + d[0];
+                        int y = j + d[1];
+                        if (x >= 0 && x < rows && y >= 0 && y < cols && grid[x][y] == '1') {
+                            int id1 = i * cols + j;
+                            int id2 = x * cols + y;
+                            uf.union(id1, id2);
+                        }
+                    }
+                }
+            }
+        }
+        return uf.count;
     }
 }
 // @lc code=end
