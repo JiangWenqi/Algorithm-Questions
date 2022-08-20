@@ -80,3 +80,4 @@ public class MaxHeap {
 
 }
 ```
+The time complexity of building a heap is `O(n)`

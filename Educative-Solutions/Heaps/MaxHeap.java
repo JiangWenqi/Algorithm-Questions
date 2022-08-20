@@ -3,7 +3,7 @@ import java.util.Arrays;
 public class MaxHeap {
 
     public void buildMaxHeap(int[] array) {
-        // swap largest child to parent node 
+        // swap largest child to parent node
         for (int i = (array.length - 1) / 2; i >= 0; i--) {
             maxHeapify(i, array);
         }
@@ -26,9 +26,10 @@ public class MaxHeap {
                 int temp = array[largest];
                 array[largest] = array[index];
                 array[index] = temp;
+                // go left or right
                 index = largest;
             } else {
-                // if max heap property is satisfied 
+                // if max heap property is satisfied
                 break;
             }
         }
