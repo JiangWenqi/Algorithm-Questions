@@ -101,7 +101,6 @@ public:
         prev->next = NULL;
         ListNode* l = sortList(head), * r = sortList(slow);
         return merge(l, r);
-
     }
 };
 // @lc code=end
