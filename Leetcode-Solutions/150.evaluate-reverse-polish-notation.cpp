@@ -66,49 +66,37 @@
  *
  */
 
-// @lc code=start
-class Solution
-{
+ // @lc code=start
+class Solution {
 public:
-    int evalRPN(vector<string> &tokens)
-    {
+    int evalRPN(vector<string>& tokens) {
         stack<int> stk;
-        for (string &token : tokens)
-        {
-            if (token == "*")
-            {
+        for (string& token : tokens) {
+            if (token == "*") {
                 int a = stk.top();
                 stk.pop();
                 int b = stk.top();
                 stk.pop();
                 stk.push(a * b);
-            }
-            else if (token == "/")
-            {
+            } else if (token == "/") {
                 int b = stk.top();
                 stk.pop();
                 int a = stk.top();
                 stk.pop();
                 stk.push(a / b);
-            }
-            else if (token == "+")
-            {
+            } else if (token == "+") {
                 int a = stk.top();
                 stk.pop();
                 int b = stk.top();
                 stk.pop();
                 stk.push(a + b);
-            }
-            else if (token == "-")
-            {
+            } else if (token == "-") {
                 int b = stk.top();
                 stk.pop();
                 int a = stk.top();
                 stk.pop();
                 stk.push(a - b);
-            }
-            else
-            {
+            } else {
                 stk.push(stoi(token));
             }
         }
