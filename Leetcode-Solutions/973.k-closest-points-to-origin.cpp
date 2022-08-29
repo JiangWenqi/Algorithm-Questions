@@ -4,25 +4,21 @@
  * [973] K Closest Points to Origin
  */
 
-// @lc code=start
+ // @lc code=start
 
-class Solution
-{
+class Solution {
 public:
-    vector<vector<int>> kClosest(vector<vector<int>> &points, int k)
-    {
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
         vector<vector<int>> res(k);
         priority_queue<vector<int>> q;
-        for (auto &point : points)
-        {
+        for (auto& point : points) {
             int x = point[0], y = point[1];
-            q.push({x * x + y * y, x, y});
+            q.push({ x * x + y * y, x, y });
             if (q.size() > k)
                 q.pop();
         }
-        for (int i = 0; i < k; i++)
-        {
-            res[i] = {q.top()[1], q.top()[2]};
+        for (int i = 0; i < k; i++) {
+            res[i] = { q.top()[1], q.top()[2] };
             q.pop();
         }
         return res;
