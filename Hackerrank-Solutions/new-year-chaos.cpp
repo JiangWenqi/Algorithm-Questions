@@ -11,7 +11,7 @@ vector<string> split(const string&);
  *
  * The function accepts INTEGER_ARRAY q as parameter.
  */
-
+// https://www.hackerrank.com/challenges/new-year-chaos/problem
 void minimumBribes(vector<int> q) {
     int bribes = 0, res = 0;
     for (int i = 0; i < q.size(); i++) {
