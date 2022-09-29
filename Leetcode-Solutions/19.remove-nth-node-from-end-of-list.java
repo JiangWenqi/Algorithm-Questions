@@ -12,23 +12,19 @@
  */
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
-
-        ListNode start = new ListNode(0);
-        start.next = head;
-        ListNode slow = start, fast = start;
-
-        // Move fast in front so that the gap between slow and fast becomes n
-        for (int i = 1; i <= n + 1; i++) {
+        ListNode dummy = new ListNode(-1, head);
+        ListNode slow = dummy;
+        ListNode fast = dummy;
+        while (n >= 0) {
             fast = fast.next;
+            n--;
         }
-        // Move fast to the end, maintaining the gap
         while (fast != null) {
-            slow = slow.next;
             fast = fast.next;
+            slow = slow.next;
         }
-        // Skip the desired node
-        slow.next = slow.next.next;
-        return start.next;
+        slow.next =slow.next.next;
+        return dummy.next;
     }
 }
 // @lc code=end
