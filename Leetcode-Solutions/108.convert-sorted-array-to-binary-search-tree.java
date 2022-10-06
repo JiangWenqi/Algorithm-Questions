@@ -47,17 +47,12 @@ class Solution {
 
 	private TreeNode getMidNode(int[] nums, int left, int right) {
 
-		if (left > right) {
+		if (left > right)
 			return null;
-		}
-
-		int mid = (right - left) / 2 + left;
-
+		int mid = left + right >> 1;
 		TreeNode midNode = new TreeNode(nums[mid]);
-
 		midNode.left = getMidNode(nums, left, mid - 1);
 		midNode.right = getMidNode(nums, mid + 1, right);
-
 		return midNode;
 
 	}

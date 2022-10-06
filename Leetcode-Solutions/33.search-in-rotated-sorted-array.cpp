@@ -63,7 +63,6 @@ using namespace std;
  // @lc code=start
 class Solution {
 public:
-
   int search(vector<int>& nums, int target) {
     int n = nums.size(), l = 0, r = n - 1;
     while (l <= r) {
