@@ -75,13 +75,13 @@ using namespace std;
  *
  */
 
-// @lc code=start
+ // @lc code=start
 class Solution {
- private:
-  int dirs[5] = {0, 1, 0, -1, 0};
+private:
+  int dirs[5] = { 0, 1, 0, -1, 0 };
 
- public:
-  int orangesRotting(vector<vector<int>> &grid) {
+public:
+  int orangesRotting(vector<vector<int>>& grid) {
     int m = grid.size(), n = grid[0].size();
     int minuets = -1;
     int orange = 0, rottingOrange = 0;
