@@ -84,7 +84,7 @@ public:
             if (hs[s[i]] <= ht[s[i]]) cnt++;
             while (hs[s[j]] > ht[s[j]]) hs[s[j++]]--;
             if (cnt == t.size()) {
-                if (res.empty() || i - j + 1 < res.size())
+                if (res.empty() || i - j + 1 < res.size()) 
                     res = s.substr(j, i - j + 1);
             }
         }

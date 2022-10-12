@@ -67,11 +67,11 @@ using namespace std;
 class Solution {
 public:
   int lengthOfLongestSubstring(string s) {
-    unordered_map<char, int> m;
+    unordered_map<char, int> counter;
     int res = 0;
     for (int i = 0, j = 0; i < s.size(); i++) {
-      m[s[i]]++;
-      while (m[s[i]] > 1) m[s[j++]]--;
+      counter[s[i]] ++;
+      while (counter[s[i]] > 1) counter[s[j++]]--;
       res = max(res, i - j + 1);
     }
     return res;
