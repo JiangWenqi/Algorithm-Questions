@@ -6,63 +6,32 @@
 
 // @lc code=start
 class Solution {
-    public int findCircleNum(int[][] isConnected) {
-        int n = isConnected.length;
-        UF uf = new UF(n);
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = i + 1; j < n; j++) {
-                if (isConnected[i][j] == 1)
-                    uf.union(i, j);
-            }
-        }
-        return uf.count();
+    int[] p;
+
+    int find(int x) {
+        if (p[x] != x)
+            p[x] = find(p[x]);
+        return p[x];
     }
 
-    class UF {
-        private int[] parent, size;
-        private int count;
-
-        public UF(int n) {
-            parent = new int[n];
-            size = new int[n];
-            count = n;
-            for (int i = 0; i < n; i++) {
-                parent[i] = i;
-                size[i] = 1;
+    public int findCircleNum(int[][] isConnected) {
+        int n = isConnected.length;
+        p = new int[n];
+        for (int i = 0; i < n; i++)
+            p[i] = i;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (isConnected[i][j] == 1)
+                    p[find(i)] = find(j);
             }
         }
-
-        public int find(int p) {
-            // path compression
-            while (p != parent[p]) {
-                parent[p] = parent[parent[p]];
-                p = parent[p];
-            }
-            return p;
+        int res = 0;
+        for (int i = 0; i < n; i++) {
+            if (p[i] == i)
+                res++;
         }
+        return res;
 
-        public void union(int p, int q) {
-            int rootP = find(p);
-            int rootQ = find(q);
-
-            if (rootP == rootQ) {
-                return;
-            }
-            // union by size
-            if (size[rootP] > size[rootQ]) {
-                parent[rootQ] = rootP;
-                size[rootP] += size[rootQ];
-            } else {
-                parent[rootP] = rootQ;
-                size[rootQ] += size[rootP];
-            }
-            count--;
-
-        }
-
-        public int count() {
-            return count;
-        }
     }
 
 }

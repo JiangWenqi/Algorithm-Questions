@@ -66,26 +66,36 @@ using namespace std;
 
 // @lc code=start
 const int N = 210;
-class Solution {
- private:
+class Solution
+{
+private:
   int p[N];
-  int find(int x) {
-    if (p[x] != x) p[x] = find(p[x]);
+  int find(int x)
+  {
+    if (p[x] != x)
+      p[x] = find(p[x]);
     return p[x];
   }
 
- public:
-  int findCircleNum(vector<vector<int>> &isConnected) {
+public:
+  int findCircleNum(vector<vector<int>> &isConnected)
+  {
     int n = isConnected.size();
-    for (int i = 0; i < n; i++) p[i] = i;
-    for (int i = 0; i < n; i++) {
-      for (int j = 0; j < isConnected[i].size(); j++) {
-        if (isConnected[i][j]) p[find(i)] = find(j);
+    for (int i = 0; i < n; i++)
+      p[i] = i;
+    for (int i = 0; i < n; i++)
+    {
+      for (int j = 0; j < isConnected[i].size(); j++)
+      {
+        if (isConnected[i][j])
+          p[find(i)] = find(j);
       }
     }
     int res = 0;
-    for (int i = 0; i < n; i++) {
-      if (p[i] == i) res++;
+    for (int i = 0; i < n; i++)
+    {
+      if (p[i] == i)
+        res++;
     }
     return res;
   }
