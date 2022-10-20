@@ -73,15 +73,21 @@ using namespace std;
  */
 
 // @lc code=start
-class Solution {
- private:
+class Solution
+{
+private:
   vector<vector<int>> res;
   vector<int> path;
-  void backtracking(int start, int sum, vector<int>& candidates, int target) {
-    if (sum == target) {
+  void backtracking(int start, int sum, vector<int> &candidates, int target)
+  {
+    if (sum == target)
+    {
       res.push_back(path);
-    } else if (sum < target) {
-      for (int i = start; i < candidates.size(); i++) {
+    }
+    else if (sum < target)
+    {
+      for (int i = start; i < candidates.size(); i++)
+      {
         path.push_back(candidates[i]);
         backtracking(i, sum + candidates[i], candidates, target);
         path.pop_back();
@@ -89,8 +95,9 @@ class Solution {
     }
   }
 
- public:
-  vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+public:
+  vector<vector<int>> combinationSum(vector<int> &candidates, int target)
+  {
     backtracking(0, 0, candidates, target);
     return res;
   }

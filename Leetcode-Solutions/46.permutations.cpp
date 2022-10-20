@@ -38,20 +38,25 @@
  *
  */
 
- // @lc code=start
-class Solution {
+// @lc code=start
+class Solution
+{
 private:
   vector<int> path;
   vector<bool> visited;
   vector<vector<int>> res;
-  void dfs(int idx, vector<int>& nums) {
-    if (idx == nums.size()) {
+  void dfs(int idx, vector<int> &nums)
+  {
+    if (idx == nums.size())
+    {
       res.push_back(path);
       return;
     }
 
-    for (int i = 0; i < nums.size(); i++) {
-      if (!visited[i]) {
+    for (int i = 0; i < nums.size(); i++)
+    {
+      if (!visited[i])
+      {
         path[idx] = nums[i];
         visited[i] = true;
         dfs(idx + 1, nums);
@@ -61,7 +66,8 @@ private:
   }
 
 public:
-  vector<vector<int>> permute(vector<int>& nums) {
+  vector<vector<int>> permute(vector<int> &nums)
+  {
     int n = nums.size();
     path.resize(n);
     visited.resize(n);
