@@ -62,7 +62,7 @@ public:
             int num = nums[i];
             if (mp.count(num) && i - mp[num] <= k)
             {
-                    return true;
+                return true;
             }
             else
             {

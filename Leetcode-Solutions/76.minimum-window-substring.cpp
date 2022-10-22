@@ -71,20 +71,27 @@ using namespace std;
  * Follow up: Could you find an algorithm that runs in O(m + n) time?
  */
 
- // @lc code=start
-class Solution {
+// @lc code=start
+class Solution
+{
 public:
-    string minWindow(string s, string t) {
+    string minWindow(string s, string t)
+    {
         unordered_map<char, int> hs, ht;
-        for (char& c : t) ht[c]++;
+        for (char &c : t)
+            ht[c]++;
         int cnt = 0;
         string res;
-        for (int i = 0, j = 0; i < s.size(); i++) {
-            hs[s[i]] ++;
-            if (hs[s[i]] <= ht[s[i]]) cnt++;
-            while (hs[s[j]] > ht[s[j]]) hs[s[j++]]--;
-            if (cnt == t.size()) {
-                if (res.empty() || i - j + 1 < res.size()) 
+        for (int i = 0, j = 0; i < s.size(); i++)
+        {
+            hs[s[i]]++;
+            if (hs[s[i]] <= ht[s[i]])
+                cnt++;
+            while (hs[s[j]] > ht[s[j]])
+                hs[s[j++]]--;
+            if (cnt == t.size())
+            {
+                if (res.empty() || i - j + 1 < res.size())
                     res = s.substr(j, i - j + 1);
             }
         }
@@ -92,4 +99,3 @@ public:
     }
 };
 // @lc code=end
-
