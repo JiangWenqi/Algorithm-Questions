@@ -75,68 +75,80 @@ using namespace std;
  *
  */
 
- // @lc code=start
-class Solution {
+// @lc code=start
+class Solution
+{
 private:
-    unordered_set<string> S;
+    unordered_set<string> words;
     unordered_map<string, int> dist;
-    queue<string> q;
-    vector<vector<string>> ans;
+    vector<vector<string>> res;
     vector<string> path;
-    string beginWord;
-    void dfs(string t) {
-        if (t == beginWord) {
+    string start;
+    void dfs(string word)
+    {
+        if (word == start)
+        {
             reverse(path.begin(), path.end());
-            ans.push_back(path);
+            res.push_back(path);
             reverse(path.begin(), path.end());
-        } else {
-            string r = t;
-            for (int i = 0; i < t.size(); i++) {
-                t = r;
-                for (char j = 'a'; j <= 'z'; j++) {
-                    t[i] = j;
-                    if (dist.count(t) && dist[t] + 1 == dist[r]) {
-                        path.push_back(t);
-                        dfs(t);
+        }
+        else
+        {
+            string temp;
+            for (int i = 0; i < word.size(); i++)
+            {
+                temp = word;
+                for (char c = 'a'; c <= 'z'; c++)
+                {
+                    temp[i] = c;
+                    if (dist.count(temp) && dist[temp] + 1 == dist[word])
+                    {
+                        path.push_back(temp);
+                        dfs(temp);
                         path.pop_back();
                     }
                 }
             }
         }
     }
-public:
-    vector<vector<string>> findLadders(string _beginWord, string endWord, vector<string>& wordList) {
-        for (auto word : wordList) S.insert(word);
-        beginWord = _beginWord;
-        dist[beginWord] = 0;
-        q.push(beginWord);
-        while (q.size()) {
-            auto t = q.front();
-            q.pop();
 
-            string r = t;
-            for (int i = 0; i < t.size(); i++) {
-                t = r;
-                for (char j = 'a'; j <= 'z'; j++) {
-                    t[i] = j;
-                    if (S.count(t) && dist.count(t) == 0) {
-                        dist[t] = dist[r] + 1;
-                        if (t == endWord) break;
-                        q.push(t);
+public:
+    vector<vector<string>> findLadders(string beginWord, string endWord, vector<string> &wordList)
+    {
+        for (auto word : wordList)
+            words.insert(word);
+        dist[beginWord] = 0;
+        queue<string> q;
+        q.push(beginWord);
+        while (q.size())
+        {
+            auto word = q.front();
+            q.pop();
+            string temp;
+            for (int i = 0; i < word.size(); i++)
+            {
+                temp = word;
+                for (char c = 'a'; c <= 'z'; c++)
+                {
+                    temp[i] = c;
+                    if (words.count(temp) && dist.count(temp) == 0)
+                    {
+                        dist[temp] = dist[word] + 1;
+                        if (temp == endWord)
+                            break;
+                        q.push(temp);
                     }
                 }
             }
         }
 
-        if (dist.count(endWord) == 0) return ans;
+        if (dist.count(endWord) == 0)
+            return res;
+        start = beginWord;
         path.push_back(endWord);
         dfs(endWord);
-        return ans;
+        return res;
     }
-
-
 };
 
-
 // @lc code=end
-
