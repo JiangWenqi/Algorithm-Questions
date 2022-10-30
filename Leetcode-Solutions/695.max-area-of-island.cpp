@@ -60,22 +60,27 @@ using namespace std;
  *
  */
 
- // @lc code=start
-class Solution {
+// @lc code=start
+class Solution
+{
 private:
     int res = 0;
-    int dirs[5] = { 0, 1, 0, -1, 0 };
-    void bfs(int x, int y, vector<vector<int>>& grid) {
+    int dirs[5] = {0, 1, 0, -1, 0};
+    void bfs(int x, int y, vector<vector<int>> &grid)
+    {
         int area = 0;
         queue<pair<int, int>> q;
         q.push(make_pair(x, y));
-        while (!q.empty()) {
+        while (!q.empty())
+        {
             x = q.front().first, y = q.front().second;
             q.pop();
             area++;
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 4; i++)
+            {
                 int nx = x + dirs[i], ny = y + dirs[i + 1];
-                if (nx >= 0 && nx < grid.size() && ny >= 0 && ny < grid[0].size() && grid[nx][ny] == 1) {
+                if (nx >= 0 && nx < grid.size() && ny >= 0 && ny < grid[0].size() && grid[nx][ny] == 1)
+                {
                     q.push(make_pair(nx, ny));
                     grid[nx][ny] = 0;
                 }
@@ -85,11 +90,15 @@ private:
     }
 
 public:
-    int maxAreaOfIsland(vector<vector<int>>& grid) {
+    int maxAreaOfIsland(vector<vector<int>> &grid)
+    {
         int m = grid.size(), n = grid[0].size();
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (grid[i][j]) {
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (grid[i][j])
+                {
                     grid[i][j] = 0;
                     bfs(i, j, grid);
                 }
