@@ -67,15 +67,18 @@ using namespace std;
  *
  */
 
- // @lc code=start
-class Solution {
+// @lc code=start
+class Solution
+{
 private:
-  int dirs[5] = { 0, 1, 0, -1, 0 };
+  int dirs[5] = {0, 1, 0, -1, 0};
   int res, m, n;
 
-  void dfs(int x, int y, vector<vector<char>>& grid) {
+  void dfs(int x, int y, vector<vector<char>> &grid)
+  {
     grid[x][y] = '0';
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 4; i++)
+    {
       int nx = x + dirs[i], ny = y + dirs[i + 1];
       if (nx >= 0 && nx < m && ny >= 0 && ny < n && grid[nx][ny] == '1')
         dfs(nx, ny, grid);
@@ -83,12 +86,16 @@ private:
   }
 
 public:
-  int numIslands(vector<vector<char>>& grid) {
+  int numIslands(vector<vector<char>> &grid)
+  {
     res = 0, m = grid.size(), n = grid[0].size();
 
-    for (int i = 0; i < m; i++) {
-      for (int j = 0; j < n; j++) {
-        if (grid[i][j] == '1') {
+    for (int i = 0; i < m; i++)
+    {
+      for (int j = 0; j < n; j++)
+      {
+        if (grid[i][j] == '1')
+        {
           res++;
           dfs(i, j, grid);
         }
