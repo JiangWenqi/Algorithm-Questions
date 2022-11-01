@@ -1,16 +1,18 @@
+import java.util.Queue;
+
 /*
- * @lc app=leetcode id=1162 lang=cpp
+ * @lc app=leetcode id=1162 lang=java
  *
  * [1162] As Far from Land as Possible
  *
  * https://leetcode.com/problems/as-far-from-land-as-possible/description/
  *
  * algorithms
- * Medium (48.06%)
- * Likes:    1757
- * Dislikes: 59
- * Total Accepted:    61.3K
- * Total Submissions: 127.5K
+ * Medium (48.57%)
+ * Likes:    2309
+ * Dislikes: 69
+ * Total Accepted:    77.8K
+ * Total Submissions: 160.3K
  * Testcase Example:  '[[1,0,1],[0,0,0],[1,0,1]]'
  *
  * Given an n x n grid containing only values 0 and 1, where 0 represents water
@@ -54,44 +56,40 @@
 
 // @lc code=start
 class Solution {
-public:
-    int maxDistance(vector<vector<int>>& grid) {
-        int dirs[5] = {0, 1, 0, -1, 0};
+    public int maxDistance(int[][] grid) {
+        int[] dirs = new int[] { 0, 1, 0, -1, 0 };
         int res = -1;
-        int m = grid.size(), n = grid[0].size();
-        queue<pair<int, int>> q;
-
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (grid[i][j]) {
-                    q.push(make_pair(i, j));
-                    // make it visited
-                    grid[i][j] = -1;
-                }
+        int n = grid.length;
+        int m = grid[0].length;
+        Queue<int[]> q = new LinkedList<>();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == 1)
+                    q.add(new int[] { i, j });
             }
         }
-        // if all cell are sea or lands, return -1
-        if (q.empty() || q.size() == m * n) return res;
+        if (q.size() == 0 || q.size() == n * m)
+            return res;
 
-
-        while (!q.empty()) {
-            int num = q.size();
-            // multiple start points move one step
-            for (int k = 0; k < num; k++) {
-                int x = q.front().first, y = q.front().second;
-                q.pop();
-                for (int i = 0; i < 4; i++) {
-                    int nx = x + dirs[i], ny = y + dirs[i + 1];
-                    if (nx >= 0 && nx < m && ny >= 0 && ny < n && grid[nx][ny] == 0) {
-                        grid[nx][ny] = -1;
-                        q.push(make_pair(nx, ny));
+        while (!q.isEmpty()) {
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                int[] point = q.poll();
+                int x = point[0];
+                int y = point[1];
+                for (int d = 0; d < 4; d++) {
+                    int nx = x + dirs[d];
+                    int ny = y + dirs[d + 1];
+                    if (nx >= 0 && nx < n && ny >= 0 && ny < m && grid[nx][ny] == 0) {
+                        grid[nx][ny] = 1;
+                        q.add(new int[] { nx, ny });
                     }
                 }
             }
             res++;
         }
+
         return res;
     }
-};
+}
 // @lc code=end
-
