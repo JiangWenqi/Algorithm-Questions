@@ -66,45 +66,56 @@ using namespace std;
  *
  */
 
- // @lc code=start
-class Solution {
+// @lc code=start
+class Solution
+{
 private:
     int n, m;
-    int dirs[5] = { 0, 1, 0, -1, 0 };
+    int dirs[5] = {0, 1, 0, -1, 0};
     vector<vector<int>> state;
-    void dfs(int x, int y, int val, vector<vector<int>>& heights) {
-        if (state[x][y] & val) return;
+    void dfs(int x, int y, int val, vector<vector<int>> &heights)
+    {
+        if (state[x][y] & val)
+            return;
         state[x][y] |= val;
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++)
+        {
             int nx = x + dirs[i], ny = y + dirs[i + 1];
-            if (nx >= 0 && nx < n && ny >= 0 && ny < m && heights[nx][ny] >= heights[x][y]) {
+            if (nx >= 0 && nx < n && ny >= 0 && ny < m && heights[nx][ny] >= heights[x][y])
+            {
                 dfs(nx, ny, val, heights);
             }
         }
     }
 
 public:
-    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+    vector<vector<int>> pacificAtlantic(vector<vector<int>> &heights)
+    {
         n = heights.size(), m = heights[0].size();
         state.resize(n, vector<int>(m, 0));
         vector<vector<int>> res;
         // north
-        for (int i = 0; i < m; i++) dfs(0, i, 1, heights);
+        for (int i = 0; i < m; i++)
+            dfs(0, i, 1, heights);
         // west
-        for (int i = 0; i < n; i++) dfs(i, 0, 1, heights);
+        for (int i = 0; i < n; i++)
+            dfs(i, 0, 1, heights);
         // east
-        for (int i = 0; i < n; i++) dfs(i, m - 1, 2, heights);
+        for (int i = 0; i < n; i++)
+            dfs(i, m - 1, 2, heights);
         // south
-        for (int i = 0; i < m; i++) dfs(n - 1, i, 2, heights);
+        for (int i = 0; i < m; i++)
+            dfs(n - 1, i, 2, heights);
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (state[i][j] == 3) res.push_back({ i, j });
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                if (state[i][j] == 3)
+                    res.push_back({i, j});
             }
         }
         return res;
-
     }
 };
 // @lc code=end
-
