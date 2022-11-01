@@ -84,27 +84,36 @@
  *
  */
 
- // @lc code=start
-class Solution {
+// @lc code=start
+class Solution
+{
 public:
-//TODO
-    vector<int> findBall(vector<vector<int>>& grid) {
-        int m = grid.size(), n = grid[0].size();
+    vector<int> findBall(vector<vector<int>> &grid)
+    {
+        int n = grid.size(), m = grid[0].size();
         vector<int> res;
-        for (int i = 0; i < n; ++i) {
-            int i1 = i, i2;
-            for (int j = 0; j < m; ++j) {
-                i2 = i1 + grid[j][i1];
-                if (i2 < 0 || i2 >= n || grid[j][i2] != grid[j][i1]) {
-                    i1 = -1;
+        // the first row
+        for (int i = 0; i < m; i++)
+        {
+            int dir = i;
+            // go down
+            for (int j = 0; j < n; j++)
+            {
+                int neb = dir + grid[j][dir];
+                if (neb >= 0 && neb < m && grid[j][dir] == grid[j][neb])
+                {
+                    dir = neb;
+                }
+                else // out of boundary
+                {
+                    dir = -1;
                     break;
                 }
-                i1 = i2;
             }
-            res.push_back(i1);
+            res.push_back(dir);
         }
+
         return res;
     }
 };
 // @lc code=end
-
