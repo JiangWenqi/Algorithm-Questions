@@ -71,28 +71,36 @@ using namespace std;
  */
 
 // @lc code=start
-class Solution {
- private:
+class Solution
+{
+private:
   int dx[8] = {-1, -1, -1, 0, 0, 1, 1, 1}, dy[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
 
- public:
-  int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
+public:
+  int shortestPathBinaryMatrix(vector<vector<int>> &grid)
+  {
     int m = grid.size(), n = grid[0].size();
-    if (grid[0][0] || grid[m - 1][n - 1]) return -1;
+    if (grid[0][0] || grid[m - 1][n - 1])
+      return -1;
     queue<pair<int, int>> q;
     q.push(make_pair(0, 0));
     int res = 0;
-    while (!q.empty()) {
+    while (!q.empty())
+    {
       int sz = q.size();
       res++;
-      for (int i = 0; i < sz; i++) {
+      for (int i = 0; i < sz; i++)
+      {
         int x = q.front().first, y = q.front().second;
         q.pop();
-        if (x == m - 1 && y == n - 1) return res;
+        if (x == m - 1 && y == n - 1)
+          return res;
         grid[x][y] = 1;
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++)
+        {
           int nx = x + dx[i], ny = y + dy[i];
-          if (nx >= 0 && nx < m && ny >= 0 && ny < n && grid[nx][ny] == 0) {
+          if (nx >= 0 && nx < m && ny >= 0 && ny < n && grid[nx][ny] == 0)
+          {
             q.push(make_pair(nx, ny));
             grid[nx][ny] = 1;
           }
