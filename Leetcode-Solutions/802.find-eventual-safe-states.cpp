@@ -69,43 +69,50 @@ using namespace std;
  *
  */
 
- // @lc code=start
-class Solution {
+// @lc code=start
+class Solution
+{
 public:
-    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+    vector<int> eventualSafeNodes(vector<vector<int>> &graph)
+    {
         int n = graph.size();
         vector<int> d(n);
         vector<vector<int>> g(n);
         // 1. reverse all edges
         // 2. store in-degrees of new graph
-        for (int i = 0; i < n; i++) {
-            for (auto& j : graph[i]) {
+        for (int i = 0; i < n; i++)
+        {
+            for (auto &j : graph[i])
+            {
                 g[j].push_back(i);
-                d[i] ++;
+                d[i]++;
             }
         }
         // 3. store indexes whose in-degree equals 0
         queue<int> q;
-        for (int i = 0; i < n;i++) {
-            if (!d[i]) q.push(i);
+        for (int i = 0; i < n; i++)
+        {
+            if (!d[i])
+                q.push(i);
         }
         // 4. Cut off these edges linking above nodes
-        while (q.size()) {
+        while (q.size())
+        {
             int t = q.front();
             q.pop();
-            for (auto u : g[t]) {
-                if (--d[u] == 0) {
+            for (auto u : g[t])
+            {
+                if (--d[u] == 0)
                     q.push(u);
-                }
             }
         }
         vector<int> res;
-        for (int i = 0;i < n; i++) {
-            if (!d[i]) res.push_back(i);
+        for (int i = 0; i < n; i++)
+        {
+            if (!d[i])
+                res.push_back(i);
         }
         return res;
-
     }
 };
 // @lc code=end
-
