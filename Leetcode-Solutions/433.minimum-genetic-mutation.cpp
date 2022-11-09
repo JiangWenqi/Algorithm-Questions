@@ -87,9 +87,9 @@ public:
     int minMutation(string start, string end, vector<string> &bank)
     {
         char chars[4] = {'A', 'C', 'G', 'T'};
-        unordered_set<string> dict;
+        unordered_set<string> bank_set;
         for (string &word : bank)
-            dict.insert(word);
+            bank_set.insert(word);
         queue<string> q;
         q.push(start);
         unordered_map<string, int> dist;
@@ -106,7 +106,7 @@ public:
                 for (char &c : chars)
                 {
                     temp[i] = c;
-                    if (dict.count(temp) && !dist.count(temp))
+                    if (bank_set.count(temp) && !dist.count(temp))
                     {
                         dist[temp] = dist[curr] + 1;
                         if (temp == end)
