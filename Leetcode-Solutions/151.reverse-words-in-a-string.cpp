@@ -74,7 +74,7 @@ class Solution
 public:
     string reverseWords(string s)
     {
-        int k = 0;
+        int idx = 0;
         // __ab_cde___fgh___ => ba_edc_hgf
         for (int i = 0; i < s.size();)
         {
@@ -89,12 +89,12 @@ public:
             reverse(s.begin() + i, s.begin() + j);
 
             // Reassign the s string
-            if (k)
-                s[k++] = ' ';
+            if (idx)
+                s[idx++] = ' ';
             while (i < j)
-                s[k++] = s[i++];
+                s[idx++] = s[i++];
         }
-        s.erase(s.begin() + k, s.end()); // Get rid of the excess length
+        s.erase(s.begin() + idx, s.end()); // Get rid of the excess length
         // ba_edc_hgf => fgh_cde_ab
         reverse(s.begin(), s.end());
 
