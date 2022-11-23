@@ -79,44 +79,60 @@
  *
  */
 
- // @lc code=start
-class Solution {
+// @lc code=start
+class Solution
+{
 public:
-    bool isValidSudoku(vector<vector<char>>& board) {
+    bool isValidSudoku(vector<vector<char>> &board)
+    {
         bool visited[9];
         // rows
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 9; i++)
+        {
             memset(visited, false, sizeof visited);
-            for (int j = 0; j < 9; j++) {
-                if (board[i][j] != '.') {
+            for (int j = 0; j < 9; j++)
+            {
+                if (board[i][j] != '.')
+                {
                     int num = board[i][j] - '1';
-                    if (visited[num]) return false;
+                    if (visited[num])
+                        return false;
                     visited[num] = true;
                 }
             }
         }
 
         // cols
-        for (int j = 0; j < 9; j++) {
+        for (int j = 0; j < 9; j++)
+        {
             memset(visited, false, sizeof visited);
-            for (int i = 0; i < 9; i++) {
-                if (board[i][j] != '.') {
+            for (int i = 0; i < 9; i++)
+            {
+                if (board[i][j] != '.')
+                {
                     int num = board[i][j] - '1';
-                    if (visited[num]) return false;
+                    if (visited[num])
+                        return false;
                     visited[num] = true;
                 }
             }
         }
 
         // 3 * 3
-        for (int i = 0; i < 9; i += 3) {
-            for (int j = 0; j < 9; j += 3) {
+        for (int i = 0; i < 9; i += 3)
+        {
+            for (int j = 0; j < 9; j += 3)
+            {
                 memset(visited, false, sizeof visited);
-                for (int x = i; x < i + 3; x++) {
-                    for (int y = j; y < j + 3; y++) {
-                        if (board[x][y] != '.') {
+                for (int x = i; x < i + 3; x++)
+                {
+                    for (int y = j; y < j + 3; y++)
+                    {
+                        if (board[x][y] != '.')
+                        {
                             int num = board[x][y] - '1';
-                            if (visited[num]) return false;
+                            if (visited[num])
+                                return false;
                             visited[num] = true;
                         }
                     }
@@ -128,4 +144,3 @@ public:
     }
 };
 // @lc code=end
-
