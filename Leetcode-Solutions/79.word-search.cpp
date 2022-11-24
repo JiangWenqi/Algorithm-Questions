@@ -71,19 +71,26 @@ using namespace std;
  *
  */
 
- // @lc code=start
-class Solution {
+// @lc code=start
+class Solution
+{
 private:
-  int dirs[5] = { 0, 1, 0,-1,0 };
-  bool dfs(vector<vector<char>>& board, string word, int x, int y, int idx) {
-    if (board[x][y] != word[idx]) return false;
-    if (idx == word.size() - 1) return true;
+  int dirs[5] = {0, 1, 0, -1, 0};
+  bool dfs(vector<vector<char>> &board, string word, int x, int y, int idx)
+  {
+    if (board[x][y] != word[idx])
+      return false;
+    if (idx == word.size() - 1)
+      return true;
     char ogi = board[x][y];
     board[x][y] = '*';
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 4; i++)
+    {
       int dx = x + dirs[i], dy = y + dirs[i + 1];
-      if (dx >= 0 && dx < board.size() && dy >= 0 && dy < board[0].size()) {
-        if (dfs(board, word, dx, dy, idx + 1)) return true;
+      if (dx >= 0 && dx < board.size() && dy >= 0 && dy < board[0].size())
+      {
+        if (dfs(board, word, dx, dy, idx + 1))
+          return true;
       }
     }
     board[x][y] = ogi;
@@ -91,11 +98,15 @@ private:
   }
 
 public:
-  bool exist(vector<vector<char>>& board, string word) {
+  bool exist(vector<vector<char>> &board, string word)
+  {
     int m = board.size(), n = board[0].size();
-    for (int i = 0; i < m; i++) {
-      for (int j = 0; j < n; j++) {
-        if (dfs(board, word, i, j, 0)) return true;
+    for (int i = 0; i < m; i++)
+    {
+      for (int j = 0; j < n; j++)
+      {
+        if (dfs(board, word, i, j, 0))
+          return true;
       }
     }
     return false;
