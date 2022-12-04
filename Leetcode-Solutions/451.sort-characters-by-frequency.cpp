@@ -70,17 +70,20 @@ using namespace std;
  */
 
 // @lc code=start
-class Solution {
- public:
-  string frequencySort(string s) {
+class Solution
+{
+public:
+  string frequencySort(string s)
+  {
     unordered_map<char, int> cnt;
-    for (char &c : s) cnt[c]++;
-    sort(s.begin(), s.end(), [&](char &a, char &b) {
+    for (char &c : s)
+      cnt[c]++;
+    sort(s.begin(), s.end(), [&](char &a, char &b)
+         {
       if (cnt[a] == cnt[b])
         return a > b;
       else
-        return cnt[a] > cnt[b];
-    });
+        return cnt[a] > cnt[b]; });
     return s;
   }
 };
