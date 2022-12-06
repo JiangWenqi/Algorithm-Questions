@@ -58,37 +58,45 @@ using namespace std;
  *
  */
 
- // @lc code=start
- /**
-  * Definition for singly-linked list.
-  * struct ListNode {
-  *     int val;
-  *     ListNode *next;
-  *     ListNode() : val(0), next(nullptr) {}
-  *     ListNode(int x) : val(x), next(nullptr) {}
-  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
-  * };
-  */
-class Solution {
+// @lc code=start
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution
+{
 public:
-    ListNode* oddEvenList(ListNode* head) {
-        ListNode* sd = new ListNode(-1, head), * sp = sd;
-        ListNode* dd = new ListNode(-1, head), * dp = dd;
-        int count = 0;
-        while (head) {
-            count++;
-            if (count % 2) {
-                sp->next = new ListNode(head->val);
-                sp = sp->next;
-            } else {
-                dp->next = new ListNode(head->val);
-                dp = dp->next;
+    ListNode *oddEvenList(ListNode *head)
+    {
+        ListNode *od = new ListNode(-1, head), *o = od;
+        ListNode *ed = new ListNode(-1, head), *e = ed;
+        int idx = 1;
+        while (head)
+        {
+            if (idx % 2)
+            {
+                o->next = head;
+                o = o->next;
+            }
+            else
+            {
+                e->next = head;
+                e = e->next;
             }
             head = head->next;
+            idx++;
         }
-        if (count > 1) sp->next = dd->next;
-        return sd->next;
+        if (idx == 2)
+            return od->next;
+        o->next = ed->next;
+        e->next = NULL;
+        return od->next;
     }
 };
 // @lc code=end
-
